@@ -17,7 +17,6 @@ class PostFormRequest extends FormRequest
         return [
             'title' =>['required', 'string', 'max:255'],
             'post' => ['required'],
-            'thumbnail' => ['mimes:jpg, png, jpeg', 'max:5048'],
         ];
     }
 }
