@@ -23,13 +23,13 @@
         <table class="w-full divide-y dark:divide-gray-700 text-sm table-fixed">
             <thead class="divide-y dark:divide-gray-700">
                 <tr class="text-nowrap">
-                    <th class="px-4 py-1.5">Author</th>
-                    <th class="px-4 py-1.5 bg-slate-200">Title</th>
+                    <th class="px-4 py-1.5 w-36">Author</th>
+                    <th class="px-4 py-1.5 bg-slate-200 w-36">Title</th>
                     <th class="px-4 py-1.5">Description</th>
-                    <th class="px-4 py-1.5 bg-slate-200">Image</th>
+                    <th class="px-4 py-1.5 bg-slate-200 w-32">Image</th>
                     <th class="px-4 py-1.5">Post</th>
                     @if (Auth::check())
-                        <th class="px-4 py-1.5 bg-slate-200">Actions</th>
+                        <th class="px-4 py-1.5 bg-slate-200 w-20">Actions</th>
                     @endif
                 </tr>
             </thead>

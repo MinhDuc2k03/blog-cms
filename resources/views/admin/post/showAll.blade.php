@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', 'Admin Dashboard Page')
+@section('title', 'Admin Post Page')
 @section('content')
     <div>
         @auth
@@ -23,7 +23,7 @@
         </div>    
     @endif
     <div>
-        <a href="{{route('admin.create')}}">CREATE POST</a>
+        <a href="{{route('admin.post.create')}}">CREATE POST</a>
         <a href=""></a>
     </div>
 
@@ -31,13 +31,13 @@
         <table class="w-full divide-y dark:divide-gray-700 text-sm table-fixed">
             <thead class="divide-y dark:divide-gray-700">
                 <tr class="text-nowrap">
-                    <th class="px-4 py-1.5">Id</th>
-                    <th class="px-4 py-1.5 bg-slate-200">Author<span class="select-none"> | </span>Id</th>
-                    <th class="px-4 py-1.5">Title</th>
+                    <th class="px-4 py-1.5 w-14">Id</th>
+                    <th class="px-4 py-1.5 bg-slate-200 w-36">Author<span class="select-none"> | </span>Id</th>
+                    <th class="px-4 py-1.5 w-36">Title</th>
                     <th class="px-4 py-1.5 bg-slate-200">Description</th>
-                    <th class="px-4 py-1.5">Image</th>
+                    <th class="px-4 py-1.5 w-32">Image</th>
                     <th class="px-4 py-1.5 bg-slate-200">Post</th>
-                    <th class="px-4 py-1.5">Actions</th>
+                    <th class="px-4 py-1.5 w-20">Actions</th>
                 </tr>
             </thead>
             <tbody class="divide-y dark:divide-gray-700">
@@ -65,12 +65,12 @@
                     </td>
                     <td class="px-4 py-1.5 gap-2">
                         <div>
-                            <a href="{{ route('admin.show', $post->id) }}" class="select-none text-xs font-semibold text-purple-600 hover:text-purple-950 hover:drop-shadow-2xl hover:underline">View</a>
+                            <a href="{{ route('admin.post.show', $post->id) }}" class="select-none text-xs font-semibold text-purple-600 hover:text-purple-950 hover:drop-shadow-2xl hover:underline">View</a>
                         </div>
                         <div>
-                            <a href="{{ route('admin.edit', $post->id) }}" class="select-none text-xs font-semibold text-purple-600 hover:text-purple-950 hover:drop-shadow-2xl hover:underline">Edit</a>
+                            <a href="{{ route('admin.post.edit', $post->id) }}" class="select-none text-xs font-semibold text-purple-600 hover:text-purple-950 hover:drop-shadow-2xl hover:underline">Edit</a>
                         </div>
-                        <form action="{{ route('admin.delete', $post->id) }}" method="POST">
+                        <form action="{{ route('admin.post.delete', $post->id) }}" method="POST">
                             @csrf
                             @method('delete')
                             <button type="submit" onclick="return confirm('Are you sure you want to delete this post?')" class="select-none text-xs font-semibold text-purple-600 hover:text-purple-950 hover:drop-shadow-2xl hover:underline">Delete</button>

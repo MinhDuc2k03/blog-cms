@@ -34,7 +34,7 @@ class PostController extends Controller
         ]);
 
         if (Auth::user()->role == 1) {
-            return redirect(route('admin.dashboard'))->with('message', 'Post successfully created');
+            return redirect(route('admin.post.showAll'))->with('message', 'Post successfully created');
         } else {
             return redirect(route('home'))->with('message', 'Post successfully created');
         }
@@ -110,7 +110,7 @@ class PostController extends Controller
         }
 
         $posts = Post::all();
-        return redirect()->route('admin.dashboard')->with(['posts' => $posts]);
+        return redirect()->route('admin.post.showAll')->with(['posts' => $posts]);
     }
 
     public function destroyPost(string $id)
@@ -118,6 +118,6 @@ class PostController extends Controller
         Post::find($id)->delete();
 
         $posts = Post::all();
-        return redirect()->route('admin.dashboard')->with(['posts' => $posts]);
+        return redirect()->route('admin.post.showAll')->with(['posts' => $posts]);
     }
 }

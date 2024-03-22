@@ -1,10 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PostController;
+
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\User\UserController;
-use App\Http\Controllers\Admin\AdminController;
+
+use App\Http\Controllers\TagController;
+use App\Http\Controllers\PostController;
+
+use App\Http\Controllers\Admin\AdminTagController;
+use App\Http\Controllers\Admin\AdminPostController;
 
 
 
@@ -39,31 +44,48 @@ Route::put('/{id}/edit', [PostController::class, 'userUpdatePost'])->name('updat
 //USER DELETE
 Route::delete('/{id}', [PostController::class, 'destroyPost'])->name('delete');
 
+
+//ADMIN
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth.admin']], function() {
 
-
-    //ADMIN HOME
-    Route::get('/', [AdminController::class, 'adminIndex'])->name('index');
+    //POST HOME
+    Route::get('/', [AdminPostController::class, 'adminIndex'])->name('index');
     
+    //POST SHOW
+    Route::get('/post/{id}/show', [AdminPostController::class, 'postShow'])->name('post.show');
 
-    //ADMIN DASHBOARD
-    Route::get('/dashboard', [AdminController::class, 'adminDashboard'])->name('dashboard');
+    //POST DELETE
+    Route::delete('/post/{id}', [PostController::class, 'destroyPost'])->name('post.delete');
+
+    //POST SHOW ALL
+    Route::get('/post', [AdminPostController::class, 'postShowAll'])->name('post.showAll');
+
+    //POST EDIT
+    Route::get('/post/{id}/edit', [AdminPostController::class, 'postEdit'])->name('post.edit');
+    Route::put('/post/{id}/edit', [PostController::class, 'adminUpdatePost'])->name('post.update');
+
+    //POST CREATE
+    Route::get('/post/create', [AdminPostController::class, 'postCreate'])->name('post.create');
+    Route::post('/post/create', [PostController::class, 'store'])->name('post.create.post');
 
 
-    //ADMIN DELETE
-    Route::delete('/{id}', [PostController::class, 'destroyPost'])->name('delete');
 
 
-    //ADMIN SHOW
-    Route::get('/{id}/show', [AdminController::class, 'adminShow'])->name('show');
 
+    //TAG SHOW ALL
+    Route::get('/tag', [AdminTagController::class, 'tagShowAll'])->name('tag.showAll');
 
-    //ADMIN EDIT
-    Route::get('/{id}/edit', [AdminController::class, 'adminEdit'])->name('edit');
-    Route::put('/{id}/edit', [PostController::class, 'adminUpdatePost'])->name('update');
+    //TAG CREATE
+    Route::get('/tag/create', [AdminTagController::class, 'tagCreate'])->name('tag.create');
+    Route::post('/tag/create', [TagController::class, 'store'])->name('tag.create.post');
 
+    //TAG SHOW
+    Route::get('/tag/{id}/show', [AdminTagController::class, 'tagShow'])->name('tag.show');
 
-    //ADMIN CREATE POST
-    Route::get('/create_post', [AdminController::class, 'adminCreate'])->name('create');
-    Route::post('/create_post', [PostController::class, 'store'])->name('create.post');
+    //TAG EDIT
+    Route::get('/tag/{id}/edit', [AdminTagController::class, 'tagEdit'])->name('tag.edit');
+    Route::put('/tag/{id}/edit', [TagController::class, 'adminUpdateTag'])->name('tag.update');
+
+    //TAG DELETE
+    Route::delete('/tag/{id}', [TagController::class, 'destroyTag'])->name('tag.delete');
 });
