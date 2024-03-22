@@ -37,7 +37,7 @@ class LoginController extends Controller
         ]);
         $credentials = $request->only('email', 'password');
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials, $request->remember)) {
             if (parse_url(session()->get('url.intended'), PHP_URL_PATH) == '/admin/dashboard' && Auth::user()->role != 1) {
                 return redirect(route('home'));
             }

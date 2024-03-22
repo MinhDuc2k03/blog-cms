@@ -75,12 +75,13 @@ class PostController extends Controller
     {
         $thumbnailName = '';
         if ($request->hasFile('thumbnail')) {
-            if($oldThumbnail = Post::where('id', $id)->first()->thumbnail)
+            $oldThumbnail = Post::where('id', $id)->first()->thumbnail;
+            if ($oldThumbnail && file_exists('thumbnails/' .  $oldThumbnail))
             {
-                Storage::delete(public_path('thumbnails'), $oldThumbnail);
+                unlink('thumbnails/' .  $oldThumbnail);
             }
 
-            $thumbnailName = time() . '_' . $request->title . '.' . $request->thumbnail->extension();
+            $thumbnailName = time() . '_' . Str::slug($request->input('title'), '_') . '.' . $request->thumbnail->extension();
             $request->thumbnail->move(public_path('thumbnails'), $thumbnailName);
         }
 

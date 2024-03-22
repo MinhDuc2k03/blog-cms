@@ -32,6 +32,13 @@
                 </div>
             </div>
 
+            <div>
+                <div class="flex items-center gap-1">
+                    <input id="remember" name="remember" type="checkbox">
+                    <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Remember me</label>
+                </div>
+            </div>
+
             {{-- @if ($errors->any())
             <div class="w-1/2 m-auto text-center">
                 @foreach ($errors->all() as $error)

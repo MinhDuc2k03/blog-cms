@@ -28,7 +28,7 @@
     </div>
 
     <div class="w-4/5 m-auto mt-10 bg-slate-100 border-2 border-slate-400">
-        <table class="w-full divide-y dark:divide-gray-700 text-sm">
+        <table class="w-full divide-y dark:divide-gray-700 text-sm table-fixed">
             <thead class="divide-y dark:divide-gray-700">
                 <tr class="text-nowrap">
                     <th class="px-4 py-1.5">Id</th>
@@ -45,7 +45,7 @@
                 <tr>
                     <td class="px-4 py-1.5">{{$post->id}}</td>
                     <td class="px-4 py-1.5 bg-slate-200">{{$post->user->name}}<span class="select-none"> | </span>{{$post->user->id}}</td>
-                    <td class="px-4 py-1.5 line-clamp-1">{{$post->title}}</td>
+                    <td class="px-4 py-1.5">{{$post->title}}</td>
                     <td class="px-4 py-1.5 bg-slate-200">
                         <p class="line-clamp-1">
                             {{$post->description}}
@@ -55,15 +55,15 @@
                         @if ($post->thumbnail == '')
                             <div class="select-none">-</div>
                         @else
-                            {{$post->thumbnail}}
+                            <img src="{{ asset('thumbnails/' .  $post->thumbnail) }}" width= "100" height="100" alt="">
                         @endif
                     </td>
                     <td class="px-4 py-1.5 bg-slate-200">
-                        <p class="line-clamp-1">
+                        <p class="line-clamp-2 text-clip">
                             {{$post->post}}
                         </p>
                     </td>
-                    <td class="px-4 py-1.5 flex gap-2">
+                    <td class="px-4 py-1.5 gap-2">
                         <div>
                             <a href="{{ route('admin.show', $post->id) }}" class="select-none text-xs font-semibold text-purple-600 hover:text-purple-950 hover:drop-shadow-2xl hover:underline">View</a>
                         </div>

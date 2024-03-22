@@ -13,7 +13,7 @@
         </div>
         
         <div class="w-4/5 m-auto mt-10 bg-slate-100 border-2 border-slate-400">
-            <table class="w-full divide-y dark:divide-gray-700 text-sm">
+            <table class="w-full divide-y dark:divide-gray-700 text-sm table-fixed">
                 <tbody class="divide-y dark:divide-gray-700">
                     <tr>
                         <td class="font-semibold px-4 py-1.5 w-24 bg-slate-200">Author:</td>
@@ -37,13 +37,15 @@
                             @if ($post->thumbnail == '')
                                 <div class="select-none">-</div>
                             @else
-                                {{$post->thumbnail}}
+                                <img src="{{ asset('thumbnails/' .  $post->thumbnail) }}" class="transition-all h-16 hover:h-36" alt="">
                             @endif
                         </td>
                     </tr>
                     <tr>
                         <td class="font-semibold px-4 py-1.5 w-24 bg-slate-200">Content:</td>
-                        <td class="px-4 py-1.5">{{$post->post}}</td>
+                        <td class="px-4 py-1.5">
+                            <p class="break-words">{{$post->post}}</p>
+                        </td>
                     </tr>
                     <tr>
                         <td class="font-semibold px-4 py-1.5 w-24 bg-slate-200">Created at:</td>

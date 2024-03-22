@@ -19,8 +19,8 @@
         </div>
     @endif
 
-    <div class="w-4/5 m-auto mt-10 bg-slate-100 border-2 border-slate-400">
-        <table class="w-full divide-y dark:divide-gray-700 text-sm">
+    <div class="w-4/5 m-auto mt-10 bg-slate-100 border-2 border-slate-400 table-fixed">
+        <table class="w-full divide-y dark:divide-gray-700 text-sm table-fixed">
             <thead class="divide-y dark:divide-gray-700">
                 <tr class="text-nowrap">
                     <th class="px-4 py-1.5">Author</th>
@@ -37,9 +37,9 @@
                 @foreach ($posts as $post)
                 <tr>
                     <td class="px-4 py-1.5">{{$post->user->name}}</td>
-                    <td class="px-4 py-1.5 bg-slate-200 line-clamp-1">{{$post->title}}</td>
+                    <td class="px-4 py-1.5 bg-slate-200">{{$post->title}}</td>
                     <td class="px-4 py-1.5">
-                        <p class="line-clamp-1">
+                        <p class="">
                             {{$post->description}}
                         </p>
                     </td>
@@ -47,16 +47,16 @@
                         @if ($post->thumbnail == '')
                             <div class="select-none">-</div>
                         @else
-                            {{$post->thumbnail}}
+                            <img src="{{ asset('thumbnails/' .  $post->thumbnail) }}" width= "100" height="100" alt="">
                         @endif
                     </td>
                     <td class="px-4 py-1.5">
-                        <p class="line-clamp-1">
+                        <p class="line-clamp-2 text-ellipsis">
                             {{$post->post}}
                         </p>
                     </td>
                     @if (Auth::check())
-                    <td class="px-4 py-1.5 flex gap-2 bg-slate-200">
+                    <td class="px-4 py-1.5 gap-2 bg-slate-200">
                         @if ($post->user->id == auth()->user()->id)
                             <div>
                                 <a href="" class="select-none text-xs font-semibold text-purple-600 hover:text-purple-950 hover:drop-shadow-2xl hover:underline">View</a>
