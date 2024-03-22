@@ -37,7 +37,7 @@
                             @if ($post->thumbnail == '')
                                 <div class="select-none">-</div>
                             @else
-                                <img src="{{ asset('thumbnails/' .  $post->thumbnail) }}" class="transition-all h-16 hover:h-36" alt="">
+                                <img src="{{ asset('thumbnails/' .  $post->thumbnail) }}" class="transition-all w-24 hover:w-3/4" alt="">
                             @endif
                         </td>
                     </tr>

@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\User\UserPostController;
 
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\PostController;
@@ -14,7 +14,7 @@ use App\Http\Controllers\Admin\AdminPostController;
 
 
 //HOME
-Route::get('/', [UserController::class, 'home'])->name('home');
+Route::get('/', [UserPostController::class, 'home'])->name('home');
 
 
 //LOGIN
@@ -32,12 +32,12 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
 //USER CREATE POST
-Route::get('/create_post', [UserController::class, 'createPost'])->name('create');
+Route::get('/create_post', [UserPostController::class, 'createPost'])->name('create');
 Route::post('/create_post', [PostController::class, 'store'])->name('create.post');
 
 
 //USER EDIT
-Route::get('/{id}/edit', [UserController::class, 'editPost'])->name('edit');
+Route::get('/{id}/edit', [UserPostController::class, 'editPost'])->name('edit');
 Route::put('/{id}/edit', [PostController::class, 'userUpdatePost'])->name('update');
 
 

@@ -23,6 +23,19 @@ class PostController extends Controller
 
         $slug = Str::slug($request->input('title'), '-');
 
+        if($request->filled('tag')) {
+            $array = explode(', ', $request->input('tag'));
+            
+            foreach ($array as $key => $word) {
+                $array[$key] = Str::slug($word, '-');
+
+                if ($array[$key] == '') {
+                    unset($array[$key]);
+                };
+            };
+            dd($array);
+        }
+
         $request->validated();
         $post = Post::create([
             'title' => $request->input('title'),

@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\PostFormRequest;
 
-class UserController extends Controller
+class UserPostController extends Controller
 {
     public function home() {
         $posts = Post::all();
