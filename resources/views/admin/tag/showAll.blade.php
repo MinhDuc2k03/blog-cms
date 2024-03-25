@@ -34,7 +34,7 @@
                     <th class="px-4 py-1.5 w-14">Id</th>
                     <th class="px-4 py-1.5 w-36 bg-slate-200">Name</th>
                     <th class="px-4 py-1.5">Slug</th>
-                    <th class="px-4 py-1.5 w-20">Actions</th>
+                    <th class="px-4 py-1.5 w-20 bg-slate-200">Actions</th>
                 </tr>
             </thead>
             <tbody class="divide-y dark:divide-gray-700">
@@ -43,7 +43,7 @@
                     <td class="px-4 py-1.5">{{$tag->id}}</td>
                     <td class="px-4 py-1.5 bg-slate-200">{{$tag->name}}</td>
                     <td class="px-4 py-1.5">{{$tag->slug}}</td>
-                    <td class="px-4 py-1.5 gap-2">
+                    <td class="px-4 py-1.5 gap-2 bg-slate-200">
                         <div>
                             <a href="{{ route('admin.tag.show', $tag->id) }}" class="select-none text-xs font-semibold text-purple-600 hover:text-purple-950 hover:drop-shadow-2xl hover:underline">View</a>
                         </div>

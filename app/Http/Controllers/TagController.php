@@ -9,12 +9,12 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
-use App\Http\Requests\PostFormRequest;
+use App\Http\Requests\TagFormRequest;
 use App\Models\Tag;
 
 class TagController extends Controller
 {
-    public function store(Request $request) {
+    public function store(TagFormRequest $request) {
         $slug = '';
         if($request->filled('slug')) {
             $slug = Str::slug($request->input('slug'), '-');

@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\PostFormRequest;
 use App\Models\Post;
+use App\Models\Tag;
 
 class PostController extends Controller
 {
@@ -23,18 +24,27 @@ class PostController extends Controller
 
         $slug = Str::slug($request->input('title'), '-');
 
+        $tagIDs = [];
         if($request->filled('tag')) {
-            $array = explode(', ', $request->input('tag'));
+            $array = explode(',', $request->input('tag'));
             
             foreach ($array as $key => $word) {
                 $array[$key] = Str::slug($word, '-');
 
                 if ($array[$key] == '') {
                     unset($array[$key]);
+                    continue;
                 };
+
+                if ($tagSlug = Tag::where('slug', $array[$key])->first())
+                {
+                    array_push($tagIDs, $tagSlug->id);
+                }
+                
             };
-            dd($array);
         }
+        dd($tagIDs);
+        sort($tagIDs);
 
         $request->validated();
         $post = Post::create([
@@ -45,6 +55,7 @@ class PostController extends Controller
             'author_id' => Auth::id(),
             'slug' => $slug,
         ]);
+        $post->tags()->attach($tagIDs);
 
         if (Auth::user()->role == 1) {
             return redirect(route('admin.post.showAll'))->with('message', 'Post successfully created');
@@ -67,6 +78,27 @@ class PostController extends Controller
             $request->thumbnail->move(public_path('thumbnails'), $thumbnailName);
         }
 
+        $tagIDs = [];
+        if($request->filled('tag')) {
+            $array = explode(',', $request->input('tag'));
+            
+            foreach ($array as $key => $word) {
+                $array[$key] = Str::slug($word, '-');
+
+                if ($array[$key] == '') {
+                    unset($array[$key]);
+                    continue;
+                };
+
+                if ($tagSlug = Tag::where('slug', $array[$key])->first())
+                {
+                    array_push($tagIDs, $tagSlug->id);
+                }
+                
+            };
+        }
+        sort($tagIDs);
+
 
         $request->validated();
         $post = Post::where('id', $id)
@@ -77,6 +109,7 @@ class PostController extends Controller
             'post' => $request->input('post'),
             'slug' => $slug,
         ]);
+        $post->tags()->sync($tagIDs);
         
         $posts = Post::all();
         return redirect()->route('home')->with(['posts' => $posts]);
@@ -100,10 +133,31 @@ class PostController extends Controller
 
         $slug = Str::slug($request->input('title'), '-');
 
+        $tagIDs = [];
+        if($request->filled('tag')) {
+            $array = explode(',', $request->input('tag'));
+            
+            foreach ($array as $key => $word) {
+                $array[$key] = Str::slug($word, '-');
+
+                if ($array[$key] == '') {
+                    unset($array[$key]);
+                    continue;
+                };
+
+                if ($tagSlug = Tag::where('slug', $array[$key])->first())
+                {
+                    array_push($tagIDs, $tagSlug->id);
+                }
+                
+            };
+        }
+        sort($tagIDs);
+
+
         $request->validated();
 
-        
-        $post = Post::where('id', $id);
+        $post = Post::find($id);
         if ($request->hasFile('thumbnail'))
         {
             $post->update([
@@ -121,6 +175,7 @@ class PostController extends Controller
                 'slug' => $slug,
             ]);
         }
+        $post->tags()->sync($tagIDs);
 
         $posts = Post::all();
         return redirect()->route('admin.post.showAll')->with(['posts' => $posts]);
@@ -128,6 +183,7 @@ class PostController extends Controller
 
     public function destroyPost(string $id)
     {
+        Post::find($id)->tags()->detach();
         Post::find($id)->delete();
 
         $posts = Post::all();

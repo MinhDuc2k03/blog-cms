@@ -13,7 +13,7 @@
         </div>
         
         <div class="w-4/5 m-auto mt-10 bg-slate-100 border-2 border-slate-400">
-            <table class="w-full divide-y dark:divide-gray-700 text-sm table-fixed">
+            <table class="w-full divide-y dark:divide-gray-700 text-sm table-auto">
                 <tbody class="divide-y dark:divide-gray-700">
                     <tr>
                         <td class="font-semibold px-4 py-1.5 w-24 bg-slate-200">Author:</td>
@@ -39,6 +39,17 @@
                             @else
                                 <img src="{{ asset('thumbnails/' .  $post->thumbnail) }}" class="transition-all w-24 hover:w-3/4" alt="">
                             @endif
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="font-semibold px-4 py-1.5 w-24 bg-slate-200">Tags:</td>
+                        <td class="px-4 py-1.5">
+                            @foreach ($post->tags as $key=>$tag)
+                                {{$tag->name}}
+                                @if ($key != array_key_last($post->tags->toArray()))
+                                    <span class="">,</span>
+                                @endif
+                            @endforeach
                         </td>
                     </tr>
                     <tr>
