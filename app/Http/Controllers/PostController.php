@@ -115,6 +115,7 @@ class PostController extends Controller
             'description' => $request->input('description'),
             'thumbnail' => $thumbnailName,
             'post' => $request->input('post'),
+            'category_id' => Category::Where('name', $request->input('category'))->first()->id,
             'slug' => $slug,
         ]);
         $post->tags()->sync($tagIDs);
@@ -172,6 +173,7 @@ class PostController extends Controller
                 'title' => $request->input('title'),
                 'description' => $request->input('description'),
                 'thumbnail' => $thumbnailName,
+                'category_id' => Category::Where('name', $request->input('category'))->first()->id,
                 'post' => $request->input('post'),
                 'slug' => $slug,
             ]);
@@ -179,6 +181,7 @@ class PostController extends Controller
             $post->update([
                 'title' => $request->input('title'),
                 'description' => $request->input('description'),
+                'category_id' => Category::Where('name', $request->input('category'))->first()->id,
                 'post' => $request->input('post'),
                 'slug' => $slug,
             ]);

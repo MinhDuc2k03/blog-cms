@@ -40,7 +40,7 @@
                             <form action="{{ route('admin.category.delete', $category->id) }}" method="POST">
                                 @csrf
                                 @method('delete')
-                                <button type="submit" onclick="return confirm('Are you sure you want to delete this category?')" class="select-none text-xs font-semibold text-purple-600 hover:text-purple-950 hover:drop-shadow-2xl hover:underline">Delete</button>
+                                <button type="submit" onclick="return confirm('Are you sure you want to delete this category? DOING THIS WILL ALSO DELETE POSTS THAT HAS THIS CATEGORY.')" class="select-none text-xs font-semibold text-purple-600 hover:text-purple-950 hover:drop-shadow-2xl hover:underline">Delete</button>
                             </form>
                         </td>
                     </tr>

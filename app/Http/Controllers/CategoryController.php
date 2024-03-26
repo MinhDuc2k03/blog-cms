@@ -57,6 +57,7 @@ class CategoryController extends Controller
 
     public function destroyCategory(string $id)
     {
+        Category::find($id)->posts()->delete();
         Category::find($id)->delete();
 
         $categories = Category::all();

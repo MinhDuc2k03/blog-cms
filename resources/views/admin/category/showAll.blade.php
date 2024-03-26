@@ -1,7 +1,17 @@
-@extends('layout')
+@extends('admin.layouts.layoutSidebar')
 
 @section('title', 'Admin Category Page')
 @section('content')
+<div class="p-4 sm:ml-64">
+    <div class="sm:mx-auto sm:w-4/5 flex mt-12 gap-1.5 items-baseline w-4/5">
+        <p class="text-2xl font-semibold text-gray-900">Post</p>
+        @if ($categories->count() > 1)
+            <p class="text-sm align-text-bottom">Showing {{$categories->count()}} categories</p>
+        @else
+            <p class="text-sm align-text-bottom">Showing {{$categories->count()}} category</p>
+        @endif
+    </div>
+
     <div>
         @auth
             <a href="{{ route('logout') }}">LOGOUT</a>
@@ -53,7 +63,7 @@
                         <form action="{{ route('admin.category.delete', $category->id) }}" method="POST">
                             @csrf
                             @method('delete')
-                            <button type="submit" onclick="return confirm('Are you sure you want to delete this category?')" class="select-none text-xs font-semibold text-purple-600 hover:text-purple-950 hover:drop-shadow-2xl hover:underline">Delete</button>
+                            <button type="submit" onclick="return confirm('Are you sure you want to delete this category? DOING THIS WILL ALSO DELETE POSTS THAT HAS THIS CATEGORY.')" class="select-none text-xs font-semibold text-purple-600 hover:text-purple-950 hover:drop-shadow-2xl hover:underline">Delete</button>
                         </form>
                     </td>
                 </tr>
@@ -65,4 +75,5 @@
     <div class="relative overflow-x-auto">
         
     </div>
+</div>
 @endsection

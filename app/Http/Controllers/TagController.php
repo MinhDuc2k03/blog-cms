@@ -58,7 +58,6 @@ class TagController extends Controller
     public function destroyTag(string $id)
     {
         Tag::find($id)->delete();
-
         $tags = Tag::all();
         return redirect()->route('admin.tag.showAll')->with(['tags' => $tags]);
     }

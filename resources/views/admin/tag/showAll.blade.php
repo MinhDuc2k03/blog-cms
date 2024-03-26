@@ -1,7 +1,18 @@
-@extends('layout')
+@extends('admin.layouts.layoutSidebar')
 
 @section('title', 'Admin Tag Page')
 @section('content')
+<div class="p-4 sm:ml-64">
+    <div class="sm:mx-auto sm:w-4/5 flex mt-12 gap-1.5 items-baseline w-4/5">
+        <p class="text-2xl font-semibold text-gray-900">Post</p>
+        
+        @if ($tags->count() > 1)
+            <p class="text-sm align-text-bottom">Showing {{$tags->count()}} tags</p>
+        @else
+            <p class="text-sm align-text-bottom">Showing {{$tags->count()}} tag</p>
+        @endif
+    </div>
+
     <div>
         @auth
             <a href="{{ route('logout') }}">LOGOUT</a>
@@ -65,4 +76,5 @@
     <div class="relative overflow-x-auto">
         
     </div>
+</div>
 @endsection
