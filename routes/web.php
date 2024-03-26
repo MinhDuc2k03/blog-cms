@@ -5,9 +5,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\User\UserPostController;
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\PostController;
 
+use App\Http\Controllers\Admin\AdminCategoryController;
 use App\Http\Controllers\Admin\AdminTagController;
 use App\Http\Controllers\Admin\AdminPostController;
 
@@ -88,4 +90,24 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth.admi
 
     //TAG DELETE
     Route::delete('/tag/{id}', [TagController::class, 'destroyTag'])->name('tag.delete');
+
+
+
+
+    //CATEGORY SHOW ALL
+    Route::get('/category', [AdminCategoryController::class, 'categoryShowAll'])->name('category.showAll');
+
+    //CATEGORY CREATE
+    Route::get('/category/create', [AdminCategoryController::class, 'categoryCreate'])->name('category.create');
+    Route::post('/category/create', [CategoryController::class, 'store'])->name('category.create.post');
+
+    //CATEGORY SHOW
+    Route::get('/category/{id}/show', [AdminCategoryController::class, 'categoryShow'])->name('category.show');
+
+    //CATEGORY EDIT
+    Route::get('/category/{id}/edit', [AdminCategoryController::class, 'categoryEdit'])->name('category.edit');
+    Route::put('/category/{id}/edit', [CategoryController::class, 'adminUpdateCategory'])->name('category.update');
+
+    //CATEGORY DELETE
+    Route::delete('/category/{id}', [CategoryController::class, 'destroyCategory'])->name('category.delete');
 });

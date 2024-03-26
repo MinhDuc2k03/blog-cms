@@ -41,43 +41,45 @@
                 </tr>
             </thead>
             <tbody class="divide-y dark:divide-gray-700">
-                @foreach ($posts as $post)
-                <tr>
-                    <td class="px-4 py-1.5">{{$post->id}}</td>
-                    <td class="px-4 py-1.5 bg-slate-200">{{$post->user->name}}<span class="select-none"> | </span>{{$post->user->id}}</td>
-                    <td class="px-4 py-1.5">{{$post->title}}</td>
-                    <td class="px-4 py-1.5 bg-slate-200">
-                        <p class="line-clamp-1">
-                            {{$post->description}}
-                        </p>
-                    </td>
-                    <td class="px-4 py-1.5">
-                        @if ($post->thumbnail == '')
-                            <div class="select-none">-</div>
-                        @else
-                            <img src="{{ asset('thumbnails/' .  $post->thumbnail) }}" width= "100" height="100" alt="">
-                        @endif
-                    </td>
-                    <td class="px-4 py-1.5 bg-slate-200">
-                        <p class="line-clamp-2 text-clip">
-                            {{$post->post}}
-                        </p>
-                    </td>
-                    <td class="px-4 py-1.5 gap-2">
-                        <div>
-                            <a href="{{ route('admin.post.show', $post->id) }}" class="select-none text-xs font-semibold text-purple-600 hover:text-purple-950 hover:drop-shadow-2xl hover:underline">View</a>
-                        </div>
-                        <div>
-                            <a href="{{ route('admin.post.edit', $post->id) }}" class="select-none text-xs font-semibold text-purple-600 hover:text-purple-950 hover:drop-shadow-2xl hover:underline">Edit</a>
-                        </div>
-                        <form action="{{ route('admin.post.delete', $post->id) }}" method="POST">
-                            @csrf
-                            @method('delete')
-                            <button type="submit" onclick="return confirm('Are you sure you want to delete this post?')" class="select-none text-xs font-semibold text-purple-600 hover:text-purple-950 hover:drop-shadow-2xl hover:underline">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-                @endforeach
+                @if ($posts != null)
+                    @foreach ($posts as $post)
+                    <tr>
+                        <td class="px-4 py-1.5">{{$post->id}}</td>
+                        <td class="px-4 py-1.5 bg-slate-200">{{$post->user->name}}<span class="select-none"> | </span>{{$post->user->id}}</td>
+                        <td class="px-4 py-1.5">{{$post->title}}</td>
+                        <td class="px-4 py-1.5 bg-slate-200">
+                            <p class="line-clamp-1">
+                                {{$post->description}}
+                            </p>
+                        </td>
+                        <td class="px-4 py-1.5">
+                            @if ($post->thumbnail == '')
+                                <div class="select-none">-</div>
+                            @else
+                                <img src="{{ asset('thumbnails/' .  $post->thumbnail) }}" width= "100" height="100" alt="">
+                            @endif
+                        </td>
+                        <td class="px-4 py-1.5 bg-slate-200">
+                            <p class="line-clamp-2 text-clip">
+                                {{$post->post}}
+                            </p>
+                        </td>
+                        <td class="px-4 py-1.5 gap-2">
+                            <div>
+                                <a href="{{ route('admin.post.show', $post->id) }}" class="select-none text-xs font-semibold text-purple-600 hover:text-purple-950 hover:drop-shadow-2xl hover:underline">View</a>
+                            </div>
+                            <div>
+                                <a href="{{ route('admin.post.edit', $post->id) }}" class="select-none text-xs font-semibold text-purple-600 hover:text-purple-950 hover:drop-shadow-2xl hover:underline">Edit</a>
+                            </div>
+                            <form action="{{ route('admin.post.delete', $post->id) }}" method="POST">
+                                @csrf
+                                @method('delete')
+                                <button type="submit" onclick="return confirm('Are you sure you want to delete this post?')" class="select-none text-xs font-semibold text-purple-600 hover:text-purple-950 hover:drop-shadow-2xl hover:underline">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    @endforeach
+                @endif
             </tbody>
         </table>
     </div>

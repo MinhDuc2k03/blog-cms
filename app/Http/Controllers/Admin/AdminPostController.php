@@ -15,8 +15,17 @@ use Illuminate\Support\Facades\Session;
 
 class AdminPostController extends Controller
 {
-    public function postShowAll() {
-        $posts = Post::all();
+    public function postShowAll(Request $request) {
+        if($request->filled('tag_id') && Tag::with('posts')->find($request->input('tag_id')) != null) {
+            $posts = Tag::with('posts')->find($request->input('tag_id'))->posts;
+        } elseif($request->filled('tag_id') == false) {
+            $posts = Post::all();
+        } elseif (Tag::with('posts')->find($request->input('tag_id')) == null) {
+            $posts = null;
+        }
+        
+    //    $posts = Tag::with('posts')->find($request->input('tag_id'))->posts;
+    //    $posts = Post::all();
 
         if (Auth::check()) {
             return view('admin.post.showAll', compact('posts'));

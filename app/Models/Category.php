@@ -9,4 +9,16 @@ use App\Models\User;
 class Category extends Model
 {
     use HasFactory;
+
+    protected $table = 'categories';
+
+    protected $fillable = [
+        'name',
+        'slug',
+    ];
+
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
 }

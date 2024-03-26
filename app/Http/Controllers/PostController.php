@@ -43,7 +43,6 @@ class PostController extends Controller
                 
             };
         }
-        dd($tagIDs);
         sort($tagIDs);
 
         $request->validated();
