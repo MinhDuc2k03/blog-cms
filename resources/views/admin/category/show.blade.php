@@ -16,24 +16,24 @@
             <table class="w-full divide-y dark:divide-gray-700 text-sm table-fixed">
                 <tbody class="divide-y dark:divide-gray-700">
                     <tr>
-                        <td class="font-semibold px-4 py-1.5 w-24 bg-slate-200">Name:</td>
-                        <td class="px-4 py-1.5">{{$category->name}}</td>
+                        <td class="font-semibold px-4 py-3 w-24 bg-slate-200">Name:</td>
+                        <td class="px-4 py-3">{{$category->name}}</td>
                     </tr>
                     <tr>
-                        <td class="font-semibold px-4 py-1.5 w-24 bg-slate-200">Slug:</td>
-                        <td class="px-4 py-1.5">{{$category->slug}}</td>
+                        <td class="font-semibold px-4 py-3 w-24 bg-slate-200">Slug:</td>
+                        <td class="px-4 py-3">{{$category->slug}}</td>
                     </tr>
                     <tr>
-                        <td class="font-semibold px-4 py-1.5 w-24 bg-slate-200">Created at:</td>
-                        <td class="px-4 py-1.5">{{$category->created_at}}</td>
+                        <td class="font-semibold px-4 py-3 w-24 bg-slate-200">Created at:</td>
+                        <td class="px-4 py-3">{{$category->created_at}}</td>
                     </tr>
                     <tr>
-                        <td class="font-semibold px-4 py-1.5 w-24 bg-slate-200">Updated at:</td>
-                        <td class="px-4 py-1.5">{{$category->updated_at}}</td>
+                        <td class="font-semibold px-4 py-3 w-24 bg-slate-200">Updated at:</td>
+                        <td class="px-4 py-3">{{$category->updated_at}}</td>
                     </tr>
                     <tr>
-                        <td class="font-semibold px-4 py-1.5 w-24 bg-slate-200">Action:</td>
-                        <td class="px-4 py-1.5 flex gap-2">
+                        <td class="font-semibold px-4 py-3 w-24 bg-slate-200">Action:</td>
+                        <td class="px-4 py-3 flex gap-2">
                             <div>
                                 <a href="{{ route('admin.category.edit', $category->id) }}" class="select-none text-xs font-semibold text-purple-600 hover:text-purple-950 hover:drop-shadow-2xl hover:underline">Edit</a>
                             </div>

@@ -17,9 +17,9 @@ class CategoryController extends Controller
     public function store(CategoryFormRequest $request) {
         $slug = '';
         if($request->filled('slug')) {
-            $slug = Str::slug($request->input('slug'), '-');
+            $slug = Str::slug($request->input('slug'), '_');
         } else {
-            $slug = Str::slug($request->input('name'), '-');
+            $slug = Str::slug($request->input('name'), '_');
         }
 
         $category = Category::create([
@@ -38,9 +38,9 @@ class CategoryController extends Controller
     {
         $slug = '';
         if($request->filled('slug')) {
-            $slug = Str::slug($request->input('slug'), '-');
+            $slug = Str::slug($request->input('slug'), '_');
         } else {
-            $slug = Str::slug($request->input('name'), '-');
+            $slug = Str::slug($request->input('name'), '_');
         }
 
 

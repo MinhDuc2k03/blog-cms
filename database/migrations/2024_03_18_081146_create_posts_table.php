@@ -16,6 +16,7 @@ return new class extends Migration
             $table->bigInteger('author_id')->foreign('author_id')->references('id')->on('users');
             $table->string('slug', 255)->unique();
             $table->string('title', 255);  
+            $table->bigInteger('category_id')->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->mediumText('description')->nullable();
             $table->string('thumbnail')->nullable();
             $table->longText('post');

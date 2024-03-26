@@ -16,7 +16,15 @@ class PostFormRequest extends FormRequest
     {
         return [
             'title' =>['required', 'string', 'max:255'],
+            'category' => ['required', 'string', 'exists:categories,name', 'max:255'],
             'post' => ['required'],
+        ];
+    }
+
+    public function messages() {
+        return [
+            'category.required' => 'The category field is required',
+            'category.exists' => 'The category input does not exist',
         ];
     }
 }

@@ -16,24 +16,24 @@
             <table class="w-full divide-y dark:divide-gray-700 text-sm table-auto">
                 <tbody class="divide-y dark:divide-gray-700">
                     <tr>
-                        <td class="font-semibold px-4 py-1.5 w-24 bg-slate-200">Author:</td>
-                        <td class="px-4 py-1.5">{{$post->user->name}}</td>
+                        <td class="font-semibold px-4 py-3 w-24 bg-slate-200">Author:</td>
+                        <td class="px-4 py-3">{{$post->user->name}}</td>
                     </tr>
                     <tr>
-                        <td class="font-semibold px-4 py-1.5 w-24 bg-slate-200">Title:</td>
-                        <td class="px-4 py-1.5">{{$post->title}}</td>
+                        <td class="font-semibold px-4 py-3 w-24 bg-slate-200">Title:</td>
+                        <td class="px-4 py-3">{{$post->title}}</td>
                     </tr>
                     <tr>
-                        <td class="font-semibold px-4 py-1.5 w-24 bg-slate-200">Slug:</td>
-                        <td class="px-4 py-1.5">{{$post->slug}}</td>
+                        <td class="font-semibold px-4 py-3 w-24 bg-slate-200">Slug:</td>
+                        <td class="px-4 py-3">{{$post->slug}}</td>
                     </tr>
                     <tr>
-                        <td class="font-semibold px-4 py-1.5 w-24 bg-slate-200">Description:</td>
-                        <td class="px-4 py-1.5">{{$post->description}}</td>
+                        <td class="font-semibold px-4 py-3 w-24 bg-slate-200">Description:</td>
+                        <td class="px-4 py-3">{{$post->description}}</td>
                     </tr>
                     <tr>
-                        <td class="font-semibold px-4 py-1.5 w-24 bg-slate-200">Image:</td>
-                        <td class="px-4 py-1.5">
+                        <td class="font-semibold px-4 py-3 w-24 bg-slate-200">Image:</td>
+                        <td class="px-4 py-3">
                             @if ($post->thumbnail == '')
                                 <div class="select-none">-</div>
                             @else
@@ -42,33 +42,41 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="font-semibold px-4 py-1.5 w-24 bg-slate-200">Tags:</td>
-                        <td class="px-4 py-1.5">
-                            @foreach ($post->tags as $key=>$tag)
-                                {{$tag->name}}
-                                @if ($key != array_key_last($post->tags->toArray()))
-                                    <span class="">,</span>
-                                @endif
-                            @endforeach
+                        <td class="font-semibold px-4 py-3 w-24 bg-slate-200">Category:</td>
+                        <td class="px-4 py-3">{{$post->category->name}}</td>
+                    </tr>
+                    <tr>
+                        <td class="font-semibold px-4 py-3 w-24 bg-slate-200">Tags:</td>
+                        <td class="px-4 py-3">
+                            @if (count($post->tags) === 0)
+                                <div class="select-none">-</div>
+                            @else
+                                @foreach ($post->tags as $key=>$tag)
+                                    {{$tag->name}}
+                                    @if ($key != array_key_last($post->tags->toArray()))
+                                        <span class="">,</span>
+                                    @endif
+                                @endforeach
+                            @endif
                         </td>
                     </tr>
                     <tr>
-                        <td class="font-semibold px-4 py-1.5 w-24 bg-slate-200">Content:</td>
-                        <td class="px-4 py-1.5">
+                        <td class="font-semibold px-4 py-3 w-24 bg-slate-200">Content:</td>
+                        <td class="px-4 py-3">
                             <p class="break-words">{{$post->post}}</p>
                         </td>
                     </tr>
                     <tr>
-                        <td class="font-semibold px-4 py-1.5 w-24 bg-slate-200">Created at:</td>
-                        <td class="px-4 py-1.5">{{$post->created_at}}</td>
+                        <td class="font-semibold px-4 py-3 w-24 bg-slate-200">Created at:</td>
+                        <td class="px-4 py-3">{{$post->created_at}}</td>
                     </tr>
                     <tr>
-                        <td class="font-semibold px-4 py-1.5 w-24 bg-slate-200">Updated at:</td>
-                        <td class="px-4 py-1.5">{{$post->updated_at}}</td>
+                        <td class="font-semibold px-4 py-3 w-24 bg-slate-200">Updated at:</td>
+                        <td class="px-4 py-3">{{$post->updated_at}}</td>
                     </tr>
                     <tr>
-                        <td class="font-semibold px-4 py-1.5 w-24 bg-slate-200">Action:</td>
-                        <td class="px-4 py-1.5 flex gap-2">
+                        <td class="font-semibold px-4 py-3 w-24 bg-slate-200">Action:</td>
+                        <td class="px-4 py-3 flex gap-2">
                             <div>
                                 <a href="{{ route('admin.post.edit', $post->id) }}" class="select-none text-xs font-semibold text-purple-600 hover:text-purple-950 hover:drop-shadow-2xl hover:underline">Edit</a>
                             </div>
@@ -82,5 +90,6 @@
                 </tbody>
             </table>
         </div>
+        <div class="py-14"></div>
     </div>
 @endsection

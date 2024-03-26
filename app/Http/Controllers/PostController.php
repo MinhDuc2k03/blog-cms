@@ -4,14 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
+
 use App\Http\Requests\PostFormRequest;
+
 use App\Models\Post;
 use App\Models\Tag;
+use App\Models\Category;
+
+
 
 class PostController extends Controller
 {
@@ -45,6 +51,8 @@ class PostController extends Controller
         }
         sort($tagIDs);
 
+        // dd(Category::Where('name', $request->input('category'))->first()->id);
+
         $request->validated();
         $post = Post::create([
             'title' => $request->input('title'),
@@ -52,6 +60,7 @@ class PostController extends Controller
             'thumbnail' => $thumbnailName,
             'post' => $request->input('post'),
             'author_id' => Auth::id(),
+            'category_id' => Category::Where('name', $request->input('category'))->first()->id,
             'slug' => $slug,
         ]);
         $post->tags()->attach($tagIDs);
