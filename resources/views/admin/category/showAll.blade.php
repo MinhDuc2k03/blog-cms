@@ -4,7 +4,7 @@
 @section('content')
 <div class="p-4 sm:ml-64">
     <div class="sm:mx-auto sm:w-4/5 flex mt-12 gap-1.5 items-baseline w-4/5">
-        <p class="text-2xl font-semibold text-gray-900">Post</p>
+        <p class="text-3xl font-semibold text-gray-900">Category</p>
         @if ($categories->count() > 1)
             <p class="text-sm align-text-bottom">Showing {{$categories->count()}} categories</p>
         @else
@@ -32,12 +32,12 @@
             </div>
         </div>    
     @endif
-    <div>
-        <a href="{{route('admin.category.create')}}">CREATE CATEGORY</a>
-        <a href=""></a>
+
+    <div class="sm:mx-auto sm:w-4/5 flex mt-12 gap-1.5 items-baseline w-4/5">
+        <a href="{{route('admin.category.create')}}" class="rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Create Category</a>
     </div>
 
-    <div class="w-4/5 m-auto mt-10 bg-slate-100 border-2 border-slate-400">
+    <div class="w-4/5 m-auto mt-5 bg-slate-100 border-2 border-slate-400">
         <table class="w-full divide-y dark:divide-gray-700 text-sm table-fixed">
             <thead class="divide-y dark:divide-gray-700">
                 <tr class="text-nowrap">

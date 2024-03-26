@@ -4,7 +4,7 @@
 @section('content')
     <div>
         <div class="sm:mx-auto sm:w-4/5 flex mt-12 gap-1.5 items-baseline w-4/5">
-            <p class="text-2xl font-semibold text-gray-900">Post</p>
+            <p class="text-3xl font-semibold text-gray-900">Post</p>
             <p class="text-sm align-text-bottom">Preview post</p>
         </div>
 

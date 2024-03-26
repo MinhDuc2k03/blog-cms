@@ -6,9 +6,11 @@
         @vite('resources/css/app.css')
         <title>@yield('title', 'unknown')</title>
     </head>
-    <body class="bg-blue-200">
+    <body class="bg-blue-100">
         <aside id="logo-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700" aria-label="Sidebar">
-            <div class="w-full h-20 bg-gray-600"></div>
+            <div class="w-full h-20 bg-gray-600 text-center flex">
+                <span class="ml-5 m-auto">Admin lol</span>
+            </div>
             <div class="h-full pb-4 overflow-y-auto bg-gray-800">
                 <ul>
                     <li class="bg-gray-800 hover:bg-gray-700 pl-3 py-3">
@@ -17,7 +19,7 @@
                     <li class="bg-gray-800 hover:bg-gray-700 pl-3 py-3 group">
                         <div class="text-white text-lg select-none">Blog</div>
                         <ul class="">
-                            <li class="pl-2 py-1.5 hidden group-hover:block"><a href="{{ route('admin.post.showAll') }}" class="text-white hover:text-slate-300 text-lg">- Posts</a></li>
+                            <li class="pl-2 py-1.5 hidden group-hover:block"><a href="{{ route('admin.post.showAll') }}" class=" text-white hover:text-slate-300 text-lg">- Posts</a></li>
                             <li class="pl-2 py-1.5 hidden group-hover:block"><a href="{{ route('admin.category.showAll') }}" class="text-white hover:text-slate-300 text-lg">- Categories</a></li>
                             <li class="pl-2 py-1.5 hidden group-hover:block"><a href="{{ route('admin.tag.showAll') }}" class="text-white hover:text-slate-300 text-lg">- Tags</a></li>
                         </ul>
