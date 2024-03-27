@@ -12,14 +12,14 @@
         @endif
     </div>
 
-    <div>
+    {{-- <div>
         @auth
             <a href="{{ route('logout') }}">LOGOUT</a>
             <h1 class="content-center w-full">Hello {{auth()->user()->name}}, YOU ARE AN ADMIN</h1>
         @elseguest
             <a href="{{ route('login') }}">LOGIN</a>
         @endauth
-    </div>
+    </div> --}}
 
     <div class="sm:mx-auto sm:w-4/5 flex mt-12 gap-1.5 items-baseline w-4/5">
         <a href="{{route('admin.post.create')}}" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Create Post</a>

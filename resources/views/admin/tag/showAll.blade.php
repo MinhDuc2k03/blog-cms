@@ -12,14 +12,14 @@
         @endif
     </div>
 
-    <div>
+    {{-- <div>
         @auth
             <a href="{{ route('logout') }}">LOGOUT</a>
             <h1 class="content-center w-full">Hello {{auth()->user()->name}}, YOU ARE AN ADMIN</h1>
         @elseguest
             <a href="{{ route('login') }}">LOGIN</a>
         @endauth
-    </div>
+    </div> --}}
 
     @if (session('message'))
         <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-3 py-3 shadow-md" role="alert">
