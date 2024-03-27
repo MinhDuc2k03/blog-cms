@@ -24,7 +24,7 @@ class PostFormRequest extends FormRequest
     public function messages() {
         return [
             'category.required' => 'The category field is required',
-            'category.exists' => 'The category input does not exist',
+            'category.exists' => 'The category field does not exist',
         ];
     }
 }

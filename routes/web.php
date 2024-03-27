@@ -21,7 +21,7 @@ Route::get('/', [UserPostController::class, 'home'])->name('home');
 
 //LOGIN
 Route::get('/login', [LoginController::class, 'login'])->name('login');
-Route::post('/login', [LoginController::class, 'loginPost'])->name('login.post')->middleware('auth.login');
+Route::post('/login', [LoginController::class, 'loginPost'])->name('login.post');
 
 
 //REGISTER

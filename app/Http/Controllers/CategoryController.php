@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
+
 use App\Http\Requests\CategoryFormRequest;
 use App\Models\Category;
 
@@ -34,7 +35,7 @@ class CategoryController extends Controller
         }
     }
 
-    public function adminUpdateCategory(Request $request, string $id)
+    public function adminUpdateCategory(CategoryFormRequest $request, string $id)
     {
         $slug = '';
         if($request->filled('slug')) {

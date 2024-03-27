@@ -22,58 +22,58 @@
     </div>
 
     <div class="sm:mx-auto sm:w-4/5 flex mt-12 gap-1.5 items-baseline w-4/5">
-        <a href="{{route('admin.post.create')}}" class="rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Create Post</a>
+        <a href="{{route('admin.post.create')}}" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Create Post</a>
     </div>
 
-    <div class="w-4/5 m-auto mt-5 bg-slate-100 border-2 border-slate-400">
-        <table class="w-full divide-y dark:divide-gray-700 text-sm table-fixed">
-            <thead class="divide-y dark:divide-gray-700">
-                <tr class="text-nowrap">
-                    <th class="px-4 py-1.5 w-14">Id</th>
-                    <th class="px-4 py-1.5 bg-slate-200 w-36">Author<span class="select-none"> | </span>Id</th>
-                    <th class="px-4 py-1.5 w-36">Title</th>
-                    <th class="px-4 py-1.5 bg-slate-200">Description</th>
-                    <th class="px-4 py-1.5 w-32">Image</th>
-                    <th class="px-4 py-1.5 bg-slate-200">Post</th>
-                    <th class="px-4 py-1.5 w-20">Actions</th>
+    <div class="w-4/5 m-auto mt-5 bg-slate-100">
+        <table class="w-full border-collapse border border-black text-sm table-auto">
+            <thead class="border border-black">
+                <tr class="text-nowrap bg-slate-400">
+                    <th class="px-3 py-3 border border-black">Id</th>
+                    <th class="px-3 py-3 border border-black">Author<span class="select-none"> | </span>Id</th>
+                    <th class="px-3 py-3 border border-black">Title</th>
+                    <th class="px-3 py-3 border border-black">Description</th>
+                    <th class="px-3 py-3 border border-black">Image</th>
+                    <th class="px-3 py-3 border border-black">Category</th>
+                    <th class="px-3 py-3 border border-black w-0">Actions</th>
                 </tr>
             </thead>
-            <tbody class="divide-y dark:divide-gray-700">
+            <tbody class="border border-black">
                 @if ($posts != null)
                     @foreach ($posts as $post)
-                    <tr>
-                        <td class="px-4 py-1.5">{{$post->id}}</td>
-                        <td class="px-4 py-1.5 bg-slate-200">{{$post->user->name}}<span class="select-none"> | </span>{{$post->user->id}}</td>
-                        <td class="px-4 py-1.5">{{$post->title}}</td>
-                        <td class="px-4 py-1.5 bg-slate-200">
+                    <tr class="text-base">
+                        <td class="px-3 py-3 border border-black">{{$post->id}}</td>
+                        <td class="px-3 py-3 border border-black">{{$post->user->name}}<span class="select-none"> | </span>{{$post->user->id}}</td>
+                        <td class="px-3 py-3 border border-black">{{$post->title}}</td>
+                        <td class="px-3 py-3 border border-black">
                             <p class="line-clamp-1">
                                 {{$post->description}}
                             </p>
                         </td>
-                        <td class="px-4 py-1.5">
+                        <td class="px-3 py-3 border border-black">
                             @if ($post->thumbnail == '')
                                 <div class="select-none">-</div>
                             @else
                                 <img src="{{ asset('thumbnails/' .  $post->thumbnail) }}" width= "100" height="100" alt="">
                             @endif
                         </td>
-                        <td class="px-4 py-1.5 bg-slate-200">
-                            <p class="line-clamp-2 text-clip">
-                                {{$post->post}}
-                            </p>
+                        <td class="px-3 py-3 border border-black">
+                            <a href="{{ route('admin.category.show', $post->category->id)}}" class="font-semibold text-purple-700 hover:text-purple-950 hover:drop-shadow-2xl hover:underline">{{$post->category->name}}</a>
                         </td>
-                        <td class="px-4 py-1.5 gap-2">
-                            <div>
-                                <a href="{{ route('admin.post.show', $post->id) }}" class="select-none text-xs font-semibold text-purple-600 hover:text-purple-950 hover:drop-shadow-2xl hover:underline">View</a>
+                        <td class="px-3 py-3 border border-black">
+                            <div class=" gap-2 flex w-fit">
+                                <div>
+                                    <a href="{{ route('admin.post.show', $post->id) }}" class="select-none text-xs font-semibold text-purple-600 hover:text-purple-950 hover:drop-shadow-2xl hover:underline">View</a>
+                                </div>
+                                <div>
+                                    <a href="{{ route('admin.post.edit', $post->id) }}" class="select-none text-xs font-semibold text-purple-600 hover:text-purple-950 hover:drop-shadow-2xl hover:underline">Edit</a>
+                                </div>
+                                <form action="{{ route('admin.post.delete', $post->id) }}" method="POST">
+                                    @csrf
+                                    @method('delete')
+                                    <button type="submit" onclick="return confirm('Are you sure you want to delete this post?')" class="select-none text-xs font-semibold text-purple-600 hover:text-purple-950 hover:drop-shadow-2xl hover:underline">Delete</button>
+                                </form>
                             </div>
-                            <div>
-                                <a href="{{ route('admin.post.edit', $post->id) }}" class="select-none text-xs font-semibold text-purple-600 hover:text-purple-950 hover:drop-shadow-2xl hover:underline">Edit</a>
-                            </div>
-                            <form action="{{ route('admin.post.delete', $post->id) }}" method="POST">
-                                @csrf
-                                @method('delete')
-                                <button type="submit" onclick="return confirm('Are you sure you want to delete this post?')" class="select-none text-xs font-semibold text-purple-600 hover:text-purple-950 hover:drop-shadow-2xl hover:underline">Delete</button>
-                            </form>
                         </td>
                     </tr>
                     @endforeach

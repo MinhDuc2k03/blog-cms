@@ -13,7 +13,7 @@
         </div>
         
         <div class="w-4/5 m-auto mt-10 bg-slate-100 border-2 border-slate-400">
-            <table class="w-full divide-y dark:divide-gray-700 text-sm table-auto">
+            <table class="w-full divide-y dark:divide-gray-700 text-sm table-fixed">
                 <tbody class="divide-y dark:divide-gray-700">
                     <tr>
                         <td class="font-semibold px-4 py-3 w-24 bg-slate-200">Author:</td>

@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
+use App\Http\Requests\LoginFormRequest;
+
 class LoginController extends Controller
 {
 
@@ -23,25 +25,23 @@ class LoginController extends Controller
         }
         
         if (Auth::check()) {
-            return redirect()->intended(route('home'));
+            return redirect()->intended(url()->previous());
         }
         return view('login');
     }
 
 
 
-    public function loginPost(Request $request) {
-        $request->validate([
-            'email' => ['required'],
-            'password' => ['required'],
-        ]);
+    public function loginPost(LoginFormRequest $request) {
+        $request->validated();
+        
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials, $request->remember)) {
             if (parse_url(session()->get('url.intended'), PHP_URL_PATH) == '/admin/posts' && Auth::user()->role != 1) {
                 return redirect(route('home'));
             }
-            return redirect(session()->get('url.intended'));
+            return redirect()->intended();
         }
         return redirect(route('login'))->with('error', 'Wrong email or password. Try again.');
     }
