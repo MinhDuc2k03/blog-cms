@@ -34,4 +34,10 @@ class AdminUserController extends Controller
         $user = User::find($id);
         return view('admin.user.show')->with(['user' => $user]);
     }
+
+    public function userEdit(string $id)
+    {
+        $user = User::find($id);
+        return view('admin.user.update')->with(['user' => $user]);
+    }
 }

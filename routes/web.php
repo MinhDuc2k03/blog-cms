@@ -35,17 +35,20 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
 //USER CREATE POST
-Route::get('/post/create', [UserPostController::class, 'createPost'])->name('create');
-Route::post('/post/create', [PostController::class, 'store'])->name('create.post');
+Route::get('/post/create', [UserPostController::class, 'createPost'])->name('create')->middleware('loggedin');
+Route::post('/post/create', [PostController::class, 'store'])->name('create.post')->middleware('loggedin');
+
+
+Route::get('/post/{id}/show', [UserPostController::class, 'postShow'])->name('post.show');
 
 
 //USER EDIT
-Route::get('/{id}/edit', [UserPostController::class, 'editPost'])->name('edit');
-Route::put('/{id}/edit', [PostController::class, 'userUpdatePost'])->name('update');
+Route::get('/post/{id}/edit', [UserPostController::class, 'editPost'])->name('edit');
+Route::put('/post/{id}/edit', [PostController::class, 'userUpdatePost'])->name('update');
 
 
 //USER DELETE
-Route::delete('/{id}', [PostController::class, 'destroyPost'])->name('delete');
+Route::delete('/post/{id}', [PostController::class, 'destroyPost'])->name('delete');
 
 
 //PROFILE

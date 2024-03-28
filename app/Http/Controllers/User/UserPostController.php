@@ -17,6 +17,12 @@ class UserPostController extends Controller
         return view('welcome', compact('posts'));
     }
 
+    public function postShow(string $id)
+    {
+        $post = Post::find($id);
+        return view('user.show')->with(['post' => $post]);
+    }
+
     public function createPost() {
         if(!session()->has('url.intended') && url()->previous() != route('logout'))
         {

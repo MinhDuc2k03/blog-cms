@@ -23,19 +23,9 @@ class UserController extends Controller
 
     public function adminUpdateUser(Request $request, string $id)
     {
-        $slug = '';
-        if($request->filled('slug')) {
-            $slug = Str::slug($request->input('slug'), '-');
-        } else {
-            $slug = Str::slug($request->input('name'), '-');
-        }
-
-
-
-        $tag = Tag::where('id', $id);
-        $tag->update([
-            'name' => $request->input('name'),
-            'slug' => $slug,
+        $user = User::where('id', $id);
+        $user->update([
+            'display_name' => $request->input('display_name'),
         ]);
 
         $users = User::all();
@@ -48,4 +38,10 @@ class UserController extends Controller
     //     $users = User::all();
     //     return redirect()->route('admin.user.showAll')->with(['users' => $users]);
     // }
+
+    public function userShow(string $id)
+    {
+        $user = User::find($id);
+        return view('user.show')->with(['user' => $user]);
+    }
 }
