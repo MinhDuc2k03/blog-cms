@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layoutNoHeader')
 
 @section('title', 'Admin Update Post Page')
 @section('content')

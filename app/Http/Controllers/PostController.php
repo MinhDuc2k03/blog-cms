@@ -65,11 +65,10 @@ class PostController extends Controller
         ]);
         $post->tags()->attach($tagIDs);
 
-        if (Auth::user()->role == 1) {
-            return redirect(route('admin.post.showAll'))->with('message', 'Post successfully created');
-        } else {
-            return redirect(route('home'))->with('message', 'Post successfully created');
+        if (parse_url(session()->get('url.intended'), PHP_URL_PATH) == '/admin/posts' && Auth::user()->role != 1) {
+            return redirect(route('home'));
         }
+        return redirect()->intended();
     }
 
 
@@ -102,7 +101,6 @@ class PostController extends Controller
                 {
                     array_push($tagIDs, $tagSlug->id);
                 }
-                
             };
         }
         sort($tagIDs);

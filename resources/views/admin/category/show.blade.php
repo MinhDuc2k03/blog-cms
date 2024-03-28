@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layoutNoHeader')
 
 @section('title', 'Admin Category Show Page')
 @section('content')
@@ -32,7 +32,7 @@
                         <td class="px-4 py-3">{{$category->updated_at}}</td>
                     </tr>
                     <tr>
-                        <td class="font-semibold px-4 py-3 w-24 bg-slate-200">Action:</td>
+                        <td class="font-semibold px-4 py-3 w-24 bg-slate-200">Actions:</td>
                         <td class="px-4 py-3 flex gap-2">
                             <div>
                                 <a href="{{ route('admin.category.edit', $category->id) }}" class="select-none text-xs font-semibold text-purple-600 hover:text-purple-950 hover:drop-shadow-2xl hover:underline">Edit</a>

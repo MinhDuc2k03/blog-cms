@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layoutNoHeader')
 
 @section('title', 'Admin Creage Post Page')
 @section('content')

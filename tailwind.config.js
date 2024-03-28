@@ -7,7 +7,13 @@ export default {
     './resources/**/*.vue',
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        default:['Montserrat', 'sans-serif'],
+        display: ['Montserrat', 'sans-serif'],
+        body: ['Montserrat', 'sans-serif'],
+      },
+    },
   },
   plugins: [],
 }

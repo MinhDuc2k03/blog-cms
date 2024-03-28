@@ -5,10 +5,14 @@
 <div class="p-4 sm:ml-64">
     <div class="sm:mx-auto sm:w-4/5 flex mt-12 gap-1.5 items-baseline w-4/5">
         <p class="text-3xl font-semibold text-gray-900">Post</p>
-        @if ($posts->count() > 1)
-            <p class="text-sm align-text-bottom">Showing {{$posts->count()}} posts</p>
+        @if ($posts != null)
+            @if ($posts->count() > 1)
+                <p class="text-sm align-text-bottom">Showing {{$posts->count()}} posts</p>
+            @else
+                <p class="text-sm align-text-bottom">Showing {{$posts->count()}} post</p>
+            @endif
         @else
-            <p class="text-sm align-text-bottom">Showing {{$posts->count()}} post</p>
+        <p class="text-sm align-text-bottom">Showing 0 post</p>
         @endif
     </div>
 

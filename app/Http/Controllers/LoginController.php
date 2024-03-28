@@ -66,6 +66,7 @@ class LoginController extends Controller
         ]);
 
         $data['name'] = $request->name;
+        $data['display_name'] = $request->name;
         $data['email'] = $request->email;
         $data['password'] = Hash::make($request->password);
 

@@ -33,6 +33,13 @@ class AdminPostController extends Controller
     }
 
     public function postCreate() {
+        if(!session()->has('url.intended') && url()->previous() != route('logout'))
+        {
+            session(['url.intended' => url()->previous()]);
+        } else {
+            session(['url.intended' => route('home')]);
+        }
+
         if (Auth::check()) {
             return view('admin.post.create');
         }

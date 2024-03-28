@@ -5,14 +5,15 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\User\UserPostController;
 
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TagController;
-use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
 
+use App\Http\Controllers\Admin\AdminPostController;
 use App\Http\Controllers\Admin\AdminCategoryController;
 use App\Http\Controllers\Admin\AdminTagController;
-use App\Http\Controllers\Admin\AdminPostController;
-
+use App\Http\Controllers\Admin\AdminUserController;
 
 
 //HOME
@@ -34,8 +35,8 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
 //USER CREATE POST
-Route::get('/create_post', [UserPostController::class, 'createPost'])->name('create');
-Route::post('/create_post', [PostController::class, 'store'])->name('create.post');
+Route::get('/post/create', [UserPostController::class, 'createPost'])->name('create');
+Route::post('/post/create', [PostController::class, 'store'])->name('create.post');
 
 
 //USER EDIT
@@ -45,6 +46,10 @@ Route::put('/{id}/edit', [PostController::class, 'userUpdatePost'])->name('updat
 
 //USER DELETE
 Route::delete('/{id}', [PostController::class, 'destroyPost'])->name('delete');
+
+
+//PROFILE
+Route::get('/profile', [LoginController::class, 'logout'])->name('logout');
 
 
 //ADMIN
@@ -108,6 +113,27 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth.admi
     Route::get('/category/{id}/edit', [AdminCategoryController::class, 'categoryEdit'])->name('category.edit');
     Route::put('/category/{id}/edit', [CategoryController::class, 'adminUpdateCategory'])->name('category.update');
 
+
     //CATEGORY DELETE
     Route::delete('/category/{id}', [CategoryController::class, 'destroyCategory'])->name('category.delete');
+
+
+
+
+    //USER SHOW ALL
+    Route::get('/user', [AdminUserController::class, 'userShowAll'])->name('user.showAll');
+
+    //USER CREATE
+    Route::get('/user/create', [AdminUserController::class, 'userCreate'])->name('user.create');
+    Route::post('/user/create', [UserController::class, 'store'])->name('user.create.post');
+
+    //USER SHOW
+    Route::get('/user/{id}/show', [AdminUserController::class, 'userShow'])->name('user.show');
+
+    //USER EDIT
+    Route::get('/user/{id}/edit', [AdminUserController::class, 'userEdit'])->name('user.edit');
+    Route::put('/user/{id}/edit', [UserController::class, 'adminUpdateUser'])->name('user.update');
+
+    //USER DELETE
+    // Route::delete('/user/{id}', [UserController::class, 'destroyUser'])->name('user.delete');
 });

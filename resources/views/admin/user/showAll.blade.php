@@ -1,18 +1,18 @@
 @extends('admin.layouts.layoutSidebar')
 
-@section('title', 'Admin Tag Page')
+@section('title', 'Admin User Page')
 @section('content')
 <div class="p-4 sm:ml-64">
     <div class="sm:mx-auto sm:w-4/5 flex mt-12 gap-1.5 items-baseline w-4/5">
-        <p class="text-3xl font-semibold text-gray-900">Tag</p>
-        @if ($tags != null)
-            @if ($tags->count() > 1)
-                <p class="text-sm align-text-bottom">Showing {{$tags->count()}} tags</p>
+        <p class="text-3xl font-semibold text-gray-900">User</p>
+        @if ($users != null)
+            @if ($users->count() > 1)
+                <p class="text-sm align-text-bottom">Showing {{$users->count()}} users</p>
             @else
-                <p class="text-sm align-text-bottom">Showing {{$tags->count()}} tag</p>
+                <p class="text-sm align-text-bottom">Showing {{$users->count()}} user</p>
             @endif
         @else
-        <p class="text-sm align-text-bottom">Showing 0 tag</p>
+        <p class="text-sm align-text-bottom">Showing 0 user</p>
         @endif
     </div>
 
@@ -38,7 +38,7 @@
     @endif
 
     <div class="sm:mx-auto sm:w-4/5 flex mt-12 gap-1.5 items-baseline w-4/5">
-        <a href="{{route('admin.tag.create')}}" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Create Tag</a>
+        <a href="{{route('admin.user.create')}}" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Create User</a>
     </div>
 
     <div class="w-4/5 m-auto mt-5 bg-slate-100">
@@ -47,29 +47,38 @@
                 <tr class="text-nowrap bg-slate-400">
                     <th class="px-3 py-3 border border-black w-20">Id</th>
                     <th class="px-3 py-3 border border-black">Name</th>
-                    <th class="px-3 py-3 border border-black">Slug</th>
+                    <th class="px-3 py-3 border border-black">Display name</th>
+                    <th class="px-3 py-3 border border-black">Email</th>
+                    <th class="px-3 py-3 border border-black">Role</th>
                     <th class="px-3 py-3 border border-black w-0">Actions</th>
                 </tr>
             </thead>
             <tbody class="border border-black">
-                @foreach ($tags as $tag)
+                @foreach ($users as $user)
                 <tr class="text-base">
-                    <td class="px-3 py-3 border border-black">{{$tag->id}}</td>
-                    <td class="px-3 py-3 border border-black">{{$tag->name}}</td>
-                    <td class="px-3 py-3 border border-black">{{$tag->slug}}</td>
+                    <td class="px-3 py-3 border border-black">{{$user->id}}</td>
+                    <td class="px-3 py-3 border border-black">{{$user->name}}</td>
+                    <td class="px-3 py-3 border border-black">{{$user->display_name}}</td>
+                    <td class="px-3 py-3 border border-black">{{$user->email}}</td>
+                    @if ($user->role == 1)
+                        <td class="px-3 py-3 border border-black">Admin</td>
+                    @else
+                        <td class="px-3 py-3 border border-black">User</td>
+                    @endif
+                    
                     <td class="px-3 py-3 border border-black">
                         <div class=" gap-2 flex w-fit">
                             <div>
-                                <a href="{{ route('admin.tag.show', $tag->id) }}" class="select-none text-xs font-semibold text-purple-600 hover:text-purple-950 hover:drop-shadow-2xl hover:underline">View</a>
+                                <a href="{{ route('admin.user.show', $user->id) }}" class="select-none text-xs font-semibold text-purple-600 hover:text-purple-950 hover:drop-shadow-2xl hover:underline">View</a>
                             </div>
                             <div>
-                                <a href="{{ route('admin.tag.edit', $tag->id) }}" class="select-none text-xs font-semibold text-purple-600 hover:text-purple-950 hover:drop-shadow-2xl hover:underline">Edit</a>
+                                <a href="{{ route('admin.user.edit', $user->id) }}" class="select-none text-xs font-semibold text-purple-600 hover:text-purple-950 hover:drop-shadow-2xl hover:underline">Edit</a>
                             </div>
-                            <form action="{{ route('admin.tag.delete', $tag->id) }}" method="POST">
+                            {{-- <form action="{{ route('admin.user.delete', $user->id) }}" method="POST">
                                 @csrf
                                 @method('delete')
-                                <button type="submit" onclick="return confirm('Are you sure you want to delete this tag?')" class="select-none text-xs font-semibold text-purple-600 hover:text-purple-950 hover:drop-shadow-2xl hover:underline">Delete</button>
-                            </form>
+                                <button type="submit" onclick="return confirm('Are you sure you want to delete this user?')" class="select-none text-xs font-semibold text-purple-600 hover:text-purple-950 hover:drop-shadow-2xl hover:underline">Delete</button>
+                            </form> --}}
                         </div>
                     </td>
                 </tr>
