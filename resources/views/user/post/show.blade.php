@@ -12,7 +12,7 @@
             <div class="mr-3 flex justify-center items-center">
                 <div>Category:</div>
             </div>
-            <a href="./xahoi.html" class="rounded-full bg-green-700 transition duration-150 hover:bg-green-900 text-gray-100 px-9 py-2">{{$post->category->name}}</a>
+            <a href="{{route('home', ['category_id' => $post->category->id])}}" class="rounded-full bg-green-700 transition duration-150 hover:bg-green-900 text-gray-100 px-9 py-2">{{$post->category->name}}</a>
         </div>
     </div>
 
@@ -21,9 +21,9 @@
     <div class="block sm:flex justify-between mb-10 gap-2">
         <div class="flex justify-normal sm:justify-center items-center mb-3 sm:mb-0">
             <div class="flex text-sm overflow-hidden whitespace-nowrap">
-                <a href="./xahoi.html" class="text-green-700">{{$post->category->name}}</a>
+                <a href="{{route('home', ['category_id' => $post->category->id])}}" class="text-green-700">{{$post->category->name}}</a>
                 <div class="select-none">&nbsp•&nbsp</div>
-                <a href="">{{$post->user->display_name}}</a>
+                <a href="{{route('home', ['author_id' => $post->author_id])}}">{{$post->user->display_name}}</a>
                 <div class="select-none">&nbsp•&nbsp</div>
                 <div class="opacity-50">{{$post->created_at->format('d/m/Y')}}</div>
             </div>
@@ -108,10 +108,10 @@
             <div class="mr-3 flex justify-center items-center">
                 <div class="text-sm sm:text-lg">Blogs with same category</div>
             </div>
-            <a href="./xahoi.html" class="rounded-full bg-green-700 transition duration-150 hover:bg-green-900 text-gray-100 px-9 py-2">{{$post->category->name}}</a>
+            <a href="{{route('home', ['category_id' => $post->category->id])}}" class="rounded-full bg-green-700 transition duration-150 hover:bg-green-900 text-gray-100 px-9 py-2">{{$post->category->name}}</a>
         </div>
         <div class="flex justify-between items-center">
-            <a href="./xahoi.html">
+            <a href="{{route('home', ['category_id' => $post->category->id])}}">
                 <img src="./images/icons/arrowRight.png" class="sm:hidden h-4">
                 <div class="text-base font-normal transition duration-150 hover:font-bold hidden sm:block">See more</div>
             </a>
@@ -126,9 +126,9 @@
                 <div>
                     <a href="{{route('post.show', $categoryPost->id)}}" class="text-sm mb-1 line-clamp-2 sm:hidden">{{$categoryPost->title}}</a>
                     <div class="sm:hidden flex overflow-hidden mb-2 text-xs sm:mb-4 sm:text-sm">
-                        <a href="" class="text-green-700">{{$categoryPost->category->name}}</a>
+                        <a href="{{route('home', ['category_id' => $post->category->id])}}" class="text-green-700">{{$categoryPost->category->name}}</a>
                         <div class="select-none">&nbsp•&nbsp</div>
-                        <a href="">{{$categoryPost->user->display_name}}</a>
+                        <a href="{{route('home', ['author_id' => $post->author_id])}}">{{$categoryPost->user->display_name}}</a>
                         <div class="select-none">&nbsp•&nbsp</div>
                         <div class="opacity-50">{{$categoryPost->created_at->format('d/m/Y')}}</div>
                     </div>
@@ -148,9 +148,9 @@
                         <div class="flex flex-1 flex-col justify-center">
                             <a href="{{route('post.show', $categoryPost->id)}}" class="text-lg hidden sm:line-clamp-2 mb-3 no-underline hover:underline">{{$categoryPost->title}}</a>
                             <div class="hidden overflow-hidden whitespace-nowrap mb-4 sm:mb-4 sm:flex ">
-                                <a href="" class="text-green-700">{{$categoryPost->category->name}}</a>
+                                <a href="{{route('home', ['category_id' => $categoryPost->category->id])}}" class="text-green-700">{{$categoryPost->category->name}}</a>
                                 <div class="select-none">&nbsp•&nbsp</div>
-                                <a href="">{{$categoryPost->user->display_name}}</a>
+                                <a href="{{route('home', ['author_id' => $categoryPost->author_id])}}">{{$categoryPost->user->display_name}}</a>
                                 <div class="select-none">&nbsp•&nbsp</div>
                                 <div class="opacity-50">{{$categoryPost->created_at->format('d/m/Y')}}</div>
                             </div>
@@ -167,7 +167,7 @@
     <div class="flex justify-between mb-10">
         <div class="text-sm sm:text-lg">Hot blogs</div>
         <div class="flex justify-between items-center">
-            <a href="./news.html">
+            <a href="{{route('home')}}">
                 <img src="./images/icons/arrowRight.png" class="sm:hidden h-4">
                 <div class="text-base font-normal transition duration-150 hover:font-bold hidden sm:block">See more</div>
             </a>
@@ -181,9 +181,9 @@
                 <div>
                     <a href="{{route('post.show', $hotPost->id)}}" class="text-sm mb-1 line-clamp-2 sm:hidden">{{$hotPost->title}}</a>
                     <div class="sm:hidden flex overflow-hidden mb-2 text-xs sm:mb-4 sm:text-sm">
-                        <a href="" class="text-green-700">{{$hotPost->category->name}}</a>
+                        <a href="{{route('home', ['category_id' => $hotPost->category->id])}}" class="text-green-700">{{$hotPost->category->name}}</a>
                         <div class="select-none">&nbsp•&nbsp</div>
-                        <a href="">{{$hotPost->user->display_name}}</a>
+                        <a href="{{route('home', ['author_id' => $hotPost->author_id])}}">{{$hotPost->user->display_name}}</a>
                         <div class="select-none">&nbsp•&nbsp</div>
                         <div class="opacity-50">{{$hotPost->created_at->format('d/m/Y')}}</div>
                     </div>
@@ -199,9 +199,9 @@
                         <div class="flex flex-1 flex-col justify-center">
                             <a href="{{route('post.show', $hotPost->id)}}" class="text-lg hidden sm:line-clamp-2 mb-3 no-underline hover:underline">{{$hotPost->title}}</a>
                             <div class="hidden overflow-hidden whitespace-nowrap mb-4 sm:mb-4 sm:flex ">
-                                <a href="" class="text-green-700">{{$hotPost->category->name}}</a>
+                                <a href="{{route('home', ['category_id' => $hotPost->category->id])}}" class="text-green-700">{{$hotPost->category->name}}</a>
                                 <div class="select-none">&nbsp•&nbsp</div>
-                                <a href="">{{$hotPost->user->display_name}}</a>
+                                <a href="{{route('home', ['author_id' => $hotPost->author_id])}}">{{$hotPost->user->display_name}}</a>
                                 <div class="select-none">&nbsp•&nbsp</div>
                                 <div class="opacity-50">{{$hotPost->created_at->format('d/m/Y')}}</div>
                             </div>

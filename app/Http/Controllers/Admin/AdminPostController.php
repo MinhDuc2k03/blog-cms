@@ -59,25 +59,25 @@ class AdminPostController extends Controller
 
 
 
-    public function tagShowAll() {
-        $tags = Tag::all();
+    // public function tagShowAll() {
+    //     $tags = Tag::all();
 
-        if (Auth::check()) {
-            return view('admin.tag.showAll', compact('tags'));
-        }
-    }
+    //     if (Auth::check()) {
+    //         return view('admin.tag.showAll', compact('tags'));
+    //     }
+    // }
 
-    public function tagCreate() {
-        if (Auth::check()) {
-            return view('admin.tag.create');
-        }
-    }
+    // public function tagCreate() {
+    //     if (Auth::check()) {
+    //         return view('admin.tag.create');
+    //     }
+    // }
 
-    public function tagEdit(string $id)
-    {
-        $tag = Tag::find($id);
-        return view('admin.tag.update')->with(['tag' => $tag]);
-    }
+    // public function tagEdit(string $id)
+    // {
+    //     $tag = Tag::find($id);
+    //     return view('admin.tag.update')->with(['tag' => $tag]);
+    // }
 
 
 

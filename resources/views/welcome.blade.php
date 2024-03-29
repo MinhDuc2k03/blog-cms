@@ -4,6 +4,13 @@
 @section('content')
     <body class="font-default font-semibold text-gray-800">
         <div class="w-11/12 pt-32 m-auto lg:max-w-7xl">
+            <div class="relative">
+                <img src="{{ asset('assets/' . 'background.png') }}" class="rounded-2xl relative">
+                <div class="hidden ml-28 absolute -translate-y-1/2 top-1/2 w-3/12 lg:block">
+                    <img src="{{ asset('assets/' . 'banner.png') }}" class="mb-1"/>
+                </div>
+            </div>
+
             <div class="m-auto w-auto lg:w-2/3">
                 <div class="flex gap-6 mt-9 mb-9 pb-3 overflow-scroll overflow-x-auto overflow-y-auto scrollbar-h-1 scrollbar scrollbar-w-1 scrollbar-thumb-rounded-lg scrollbar-thumb-gray-500 scrollbar-track-gray-300 scroll-smooth">
                     <a href="" class="px-9 py-1.5 text-lg whitespace-nowrap leading-7 rounded-full transition duration-150 hover:bg-green-700 hover:text-gray-100">Tất cả</a>

@@ -83,8 +83,8 @@
                         </div>
                     </div>       
                 @else
-                    <a href="{{ route('login') }}" class="hidden lg:block ml-3 text-sm bg-transparent text-gray-800 transition duration-150 hover:bg-gray-300 px-6 py-2 rounded-full">Login</a>
-                    <a href="{{ route('register') }}" class="hidden lg:block ml-3 mr-6 text-sm text-white bg-gray-800 transition duration-150 hover:bg-gray-900 px-6 py-2 rounded-full">Register</a>
+                    <a href="{{ route('login') }}" class="hidden lg:block ml-3 text-base bg-transparent text-gray-800 transition duration-150 hover:bg-gray-300 px-6 py-2 rounded-full">Login</a>
+                    <a href="{{ route('register') }}" class="hidden lg:block ml-3 mr-6 text-base text-white bg-gray-800 transition duration-150 hover:bg-gray-900 px-6 py-2 rounded-full">Register</a>
                 @endif
             </div>
         </header>
