@@ -23,3 +23,10 @@ Step 6: Bắt đầu server bằng `php artisan serve` và `npm run dev`
 ### Đăng nhập vào tk admin
 Tài khoản: admin@example.com
 Password: 12345
+
+
+### Các route cho admin
+
+ - /admin/post: Trang admin cho các bài viết
+ - /admin/cagetory: Trang admin cho các mục
+ - /admin/tag: Trang admin cho các tag
