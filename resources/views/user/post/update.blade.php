@@ -21,7 +21,7 @@
         </div>
 
         <div class="sm:mx-auto sm:w-full sm:max-w-sm pb-40"> 
-            <form class="space-y-6" action="{{ route('update', ["id" => $post->id]) }}" method="POST" enctype="multipart/form-data">
+            <form class="space-y-6" action="{{ route('post.update', ["id" => $post->id]) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 

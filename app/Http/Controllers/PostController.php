@@ -196,6 +196,9 @@ class PostController extends Controller
         Post::find($id)->delete();
 
         $posts = Post::all();
-        return redirect()->route('admin.post.showAll')->with(['posts' => $posts]);
+        if (Auth::user()->role == 1) {
+            return redirect()->route('admin.post.showAll')->with(['posts' => $posts]);
+        }
+        return redirect()->route('home')->with(['posts' => $posts]);
     }
 }

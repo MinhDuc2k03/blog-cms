@@ -52,8 +52,8 @@ Route::get('/post/{id}/show', [UserPostController::class, 'postShow'])->name('po
 
 
 //USER EDIT POST
-Route::get('/post/{id}/edit', [UserPostController::class, 'editPost'])->name('edit')->middleware('loggedin');
-Route::put('/post/{id}/edit', [PostController::class, 'userUpdatePost'])->name('update')->middleware('loggedin');
+Route::get('/post/{id}/edit', [UserPostController::class, 'editPost'])->name('post.edit')->middleware('loggedin');
+Route::put('/post/{id}/edit', [PostController::class, 'userUpdatePost'])->name('post.update')->middleware('loggedin');
 
 
 //USER DELETE POST
