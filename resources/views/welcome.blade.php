@@ -26,7 +26,11 @@
                         <div class="flex gap-4 h-24 sm:h-56">
                             <div class="relative max-w-full">
                                 <a href="{{route('post.show', $post->id)}}">
-                                    <img src="{{ asset('thumbnails/' .  $post->thumbnail) }}" class="rounded-2xl w-36 h-24 sm:w-80 sm:h-52">
+                                    @if ($post->thumbnail != null)
+                                        <img src="{{ asset('thumbnails/' .  $post->thumbnail) }}" class="object-cover rounded-2xl w-36 h-24 sm:w-80 sm:h-52">
+                                    @else
+                                        <img src="{{ asset('assets/' . 'blank.png') }}" class="object-cover rounded-2xl w-36 h-24 sm:w-80 sm:h-52">
+                                    @endif
                                 </a>
                                 <button class="absolute bottom-4 left-4 sm:top-5 sm:right-5 sm:bottom-auto sm:left-auto">
                                     <img src="{{ asset('assets/' . 'heart_unselected.png') }}" class="h-6">

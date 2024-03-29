@@ -8,7 +8,7 @@ use App\Http\Controllers\User\UserPostController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TagController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\User\UserController;
 
 use App\Http\Controllers\Admin\AdminPostController;
 use App\Http\Controllers\Admin\AdminCategoryController;
@@ -34,6 +34,15 @@ Route::post('/register', [LoginController::class, 'registerPost'])->name('regist
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
+//USER PROFILE INFO
+Route::get('/user/{name}', [UserController::class, 'profileShow'])->name('profile.show');
+
+
+//USER PROFILE INFO
+Route::get('/user/{name}/edit', [UserController::class, 'profileEdit'])->name('profile.edit')->middleware('loggedin');
+Route::put('/user/{name}/edit', [UserController::class, 'profileEditPost'])->name('profile.update')->middleware('loggedin');
+
+
 //USER CREATE POST
 Route::get('/post/create', [UserPostController::class, 'createPost'])->name('create')->middleware('loggedin');
 Route::post('/post/create', [PostController::class, 'store'])->name('create.post')->middleware('loggedin');
@@ -42,17 +51,13 @@ Route::post('/post/create', [PostController::class, 'store'])->name('create.post
 Route::get('/post/{id}/show', [UserPostController::class, 'postShow'])->name('post.show');
 
 
-//USER EDIT
-Route::get('/post/{id}/edit', [UserPostController::class, 'editPost'])->name('edit');
-Route::put('/post/{id}/edit', [PostController::class, 'userUpdatePost'])->name('update');
+//USER EDIT POST
+Route::get('/post/{id}/edit', [UserPostController::class, 'editPost'])->name('edit')->middleware('loggedin');
+Route::put('/post/{id}/edit', [PostController::class, 'userUpdatePost'])->name('update')->middleware('loggedin');
 
 
-//USER DELETE
+//USER DELETE POST
 Route::delete('/post/{id}', [PostController::class, 'destroyPost'])->name('delete');
-
-
-//PROFILE
-Route::get('/profile', [LoginController::class, 'logout'])->name('logout');
 
 
 //ADMIN

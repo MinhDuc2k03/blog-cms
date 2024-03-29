@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\User;
 
 use App\Models\Post;
+use App\Models\Category;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,7 +22,10 @@ class UserPostController extends Controller
     public function postShow(string $id)
     {
         $post = Post::find($id);
-        return view('user.show')->with(['post' => $post]);
+        $categoryPosts = Post::where('category_id', $post->category->id)->get();
+        $hotPosts = Post::take(2)->get();
+
+        return view('user.post.show')->with(['post' => $post, 'categoryPosts' => $categoryPosts, 'hotPosts' => $hotPosts]);
     }
 
     public function createPost() {
@@ -32,7 +37,7 @@ class UserPostController extends Controller
         }
 
         if (Auth::check()) {
-            return view('user.create');
+            return view('user.post.create');
         }
     }
 
@@ -44,6 +49,6 @@ class UserPostController extends Controller
         }
 
         $post = Post::find($id);
-        return view('user.update')->with(['post' => $post]);
+        return view('user.post.update')->with(['post' => $post]);
     }
 }
