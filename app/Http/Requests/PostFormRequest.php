@@ -16,6 +16,7 @@ class PostFormRequest extends FormRequest
     {
         return [
             'title' =>['required', 'string', 'max:255'],
+            'slug' =>['unique'],
             'category' => ['required', 'string', 'exists:categories,name', 'max:255'],
             'post' => ['required'],
         ];

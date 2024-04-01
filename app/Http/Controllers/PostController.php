@@ -22,14 +22,22 @@ use App\Models\Category;
 class PostController extends Controller
 {
     public function store(PostFormRequest $request) {
+        $duplicate = 0;
+        $newSlug = $slug;
+        while (Post::where('slug', $newSlug)->first() != null) {
+            $duplicate += 1;
+            $newSlug = $slug .= '-' . $duplicate;
+        }
+        $slug = $newSlug;
+
         $thumbnailName = '';
         if ($request->hasFile('thumbnail')) {
-            $thumbnailName = time() . '_' . $request->title . '.' . $request->thumbnail->extension();
+            $thumbnailName = time() . '_' . Str::slug($request->title, '_') . '.' . $request->thumbnail->extension();
             $request->thumbnail->move(public_path('thumbnails'), $thumbnailName);
         }
 
         $slug = Str::slug($request->input('title'), '-');
-
+        
         $tagIDs = [];
         if($request->filled('tag')) {
             $array = explode(',', $request->input('tag'));
@@ -76,6 +84,14 @@ class PostController extends Controller
     public function userUpdatePost(PostFormRequest $request, string $id)
     {
         $slug = Str::slug($request->input('title'), '-');
+
+        $duplicate = 0;
+        $newSlug = $slug;
+        while (Post::where('slug', $newSlug)->first() != null) {
+            $duplicate += 1;
+            $newSlug = $slug .= '-' . $duplicate;
+        }
+        $slug = $newSlug;
 
         $thumbnailName = '';
         if ($request->hasFile('thumbnail')) {
