@@ -38,7 +38,7 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/user/{name}', [UserController::class, 'profileShow'])->name('profile.show');
 
 
-//USER PROFILE INFO
+//USER PROFILE EDIT
 Route::get('/user/{name}/edit', [UserController::class, 'profileEdit'])->name('profile.edit')->middleware('loggedin');
 Route::put('/user/{name}/edit', [UserController::class, 'profileEditPost'])->name('profile.update')->middleware('loggedin');
 

@@ -2,7 +2,7 @@
 
 @section('title', 'Admin Category Page')
 @section('content')
-<div class="p-4 sm:ml-64">
+<div class="py-4 sm:ml-64">
     <div class="sm:mx-auto sm:w-4/5 flex mt-12 gap-1.5 items-baseline w-4/5">
         <p class="text-3xl font-semibold text-gray-900">Category</p>
         @if ($categories != null)

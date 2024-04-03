@@ -38,6 +38,9 @@
                         <li class="bg-gray-800 hover:bg-gray-700 pl-3 py-3">
                             <a href="{{ route('admin.user.showAll') }}" class="text-white hover:text-slate-300 text-lg">Users</a>
                         </li>
+                        <li class="bg-gray-800 hover:bg-gray-700 pl-3 py-3">
+                            <a href="" class="text-white hover:text-slate-300 text-lg">Logs</a>
+                        </li>
                     </ul>
                 </div>
                 <div class="w-full h-20 bg-gray-600 absolute bottom-0 flex justify-between group">

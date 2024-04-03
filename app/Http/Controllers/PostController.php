@@ -22,6 +22,8 @@ use App\Models\Category;
 class PostController extends Controller
 {
     public function store(PostFormRequest $request) {
+        $slug = Str::slug($request->input('title'), '-');
+
         $duplicate = 0;
         $newSlug = $slug;
         while (Post::where('slug', $newSlug)->first() != null) {
@@ -32,12 +34,10 @@ class PostController extends Controller
 
         $thumbnailName = '';
         if ($request->hasFile('thumbnail')) {
-            $thumbnailName = time() . '_' . Str::slug($request->title, '_') . '.' . $request->thumbnail->extension();
+            $thumbnailName = time() . '_' . Str::slug($request->input('title'), '_') . '.' . $request->thumbnail->extension();
             $request->thumbnail->move(public_path('thumbnails'), $thumbnailName);
         }
 
-        $slug = Str::slug($request->input('title'), '-');
-        
         $tagIDs = [];
         if($request->filled('tag')) {
             $array = explode(',', $request->input('tag'));
@@ -54,7 +54,6 @@ class PostController extends Controller
                 {
                     array_push($tagIDs, $tagSlug->id);
                 }
-                
             };
         }
         sort($tagIDs);
@@ -212,9 +211,6 @@ class PostController extends Controller
         Post::find($id)->delete();
 
         $posts = Post::all();
-        if (Auth::user()->role == 1) {
-            return redirect()->route('admin.post.showAll')->with(['posts' => $posts]);
-        }
-        return redirect()->route('home')->with(['posts' => $posts]);
+        return redirect()->to(url()->previous());
     }
 }

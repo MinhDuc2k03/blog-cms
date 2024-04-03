@@ -57,10 +57,11 @@
                         </div>
                     </div>
                     @endforeach
-    
-                    <div class="mx-auto my-20 leading-10 border-2 border-black text-center w-64 rounded-full py-2 bg-white transition duration-150 hover:bg-gray-300">
+                    
+                    <div class="my-20"></div>
+                    {{-- <div class="mx-auto my-20 leading-10 border-2 border-black text-center w-64 rounded-full py-2 bg-white transition duration-150 hover:bg-gray-300">
                         <a href="">Xem thêm</a>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>

@@ -48,7 +48,9 @@ class AdminPostController extends Controller
     public function postShow(string $id)
     {
         $post = Post::find($id);
-        return view('admin.post.show')->with(['post' => $post]);
+        if ($post != null) {
+            return view('admin.post.show')->with(['post' => $post]);
+        }
     }
 
     public function postEdit(string $id)
