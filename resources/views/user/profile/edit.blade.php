@@ -15,10 +15,10 @@
 
         <div>
             <div class="flex mb-1">
-                <label for="thumbnail" class="block text-sm font-medium leading-6 text-gray-900">Profile picture</label>
+                <label for="profile_picture" class="block text-sm font-medium leading-6 text-gray-900">Profile picture</label>
             </div>                    
             <div class="mt-2">
-                <input type="file" name="thumbnail" class="pl-2 bg-white block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6">
+                <input type="file" name="profile_picture" class="pl-2 bg-white block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6">
             </div>
         </div>
 

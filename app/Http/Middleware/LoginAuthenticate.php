@@ -18,7 +18,7 @@ class LoginAuthenticate
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            if (Auth::check() && Auth::user()->role == 1) {
+            if (Auth::check() && (Auth::user()->role == 1 || Auth::user()->role == 2)) {
                 return redirect()->intended();
             } elseif (Auth::check() && Auth::user()->role == 0) {
                 return $next($request);

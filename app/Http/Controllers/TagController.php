@@ -27,7 +27,7 @@ class TagController extends Controller
             'slug' => $slug,
         ]);
 
-        if (Auth::user()->role == 1) {
+        if (Auth::user()->role != 0) {
             return redirect(route('admin.tag.showAll'))->with('message', 'Tag successfully created');
         } else {
             return redirect(route('home'))->with('message', 'Tag successfully created');

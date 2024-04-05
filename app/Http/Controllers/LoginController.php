@@ -38,7 +38,7 @@ class LoginController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials, $request->remember)) {
-            if (parse_url(session()->get('url.intended'), PHP_URL_PATH) == '/admin/posts' && Auth::user()->role != 1) {
+            if (parse_url(session()->get('url.intended'), PHP_URL_PATH) == '/admin/posts' && Auth::user()->role == 0) {
                 return redirect(route('home'));
             }
             return redirect()->intended();
@@ -64,8 +64,8 @@ class LoginController extends Controller
             'password' => ['required', 'same:password_confirmation'],
             'password_confirmation' => ['required'],
         ]);
-
-        $data['name'] = $request->name;
+        
+        $data['name'] = Str::slug($request->name, '_');
         $data['display_name'] = $request->name;
         $data['email'] = $request->email;
         $data['password'] = Hash::make($request->password);

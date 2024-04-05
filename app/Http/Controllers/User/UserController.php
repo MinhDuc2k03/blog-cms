@@ -6,9 +6,13 @@ use App\Models\Post;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
+
 use App\Http\Requests\UserEditFormRequest;
 
 class UserController extends Controller
@@ -28,23 +32,33 @@ class UserController extends Controller
     }
 
     public function profileEditPost(UserEditFormRequest $request, string $name) {
+        $pfpName = '';
+        if ($request->hasFile('profile_picture')) {
+            if (User::where('name', $name)->first()->profile_picture != null) {
+                Storage::delete(User::where('name', $name)->first()->profile_picture);
+            }
+
+            $pfpName = time() . '_' . Str::slug($request->input('name'), '_') . '.' . $request->profile_picture->extension();
+            $request->profile_picture->move(public_path('profiles'), $pfpName);
+        }
+
+
+
         if ($request->input('new_pass') != '') {
-            if ((Hash::check($request->get('new_pass'), Auth::user()->password))) {
+            if ((Hash::check($request->get('new_pass'), Auth::user()->password))
+            || ($request->input('new_pass') != $request->input('new_pass_confirmation'))
+            || (!Hash::check($request->get('old_pass'), Auth::user()->password)))
+            {
                 return redirect()->back();
             }
-        }
-        
-        if ((!Hash::check($request->get('old_pass'), Auth::user()->password))) {
-            return redirect()->back();
         }
 
         $request->validated();
 
+        if ($request->hasFile('profile_picture')) {$data['profile_picture'] = $pfpName;}
         $data['display_name'] = $request->input('display_name');
         $data['email'] = $request->input('email');
-        if ($request->input('new_pass') != '') {
-            $data['password'] = Hash::make($request->input('new_pass'));
-        }
+        if ($request->input('new_pass') != '') {$data['password'] = Hash::make($request->input('new_pass'));}
 
         User::where('name', $name)->first()->update($data);
 

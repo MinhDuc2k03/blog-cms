@@ -72,7 +72,7 @@ class PostController extends Controller
         ]);
         $post->tags()->attach($tagIDs);
 
-        if (parse_url(session()->get('url.intended'), PHP_URL_PATH) == '/admin/posts' && Auth::user()->role != 1) {
+        if (parse_url(session()->get('url.intended'), PHP_URL_PATH) == '/admin/posts' && Auth::user()->role == 0) {
             return redirect(route('home'));
         }
         return redirect()->intended();

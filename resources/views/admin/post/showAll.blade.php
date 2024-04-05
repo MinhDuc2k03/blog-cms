@@ -25,8 +25,28 @@
         @endauth
     </div> --}}
 
-    <div class="sm:mx-auto sm:w-4/5 flex mt-12 gap-1.5 items-baseline w-4/5">
-        <a href="{{route('admin.post.create')}}" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Create Post</a>
+    <div class="sm:mx-auto sm:w-4/5 flex mt-12 gap-1.5 items-baseline w-4/5 justify-between">
+        <div class="flex flex-row items-baseline">
+            <a href="{{route('admin.post.create')}}" class="rounded-md bg-indigo-600 px-3 py-1 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Create Post</a>
+            @if (Request::get('option'))
+            <a href="{{ route('admin.post.showAll') }}" class="text-purple-800 text-sm ml-2">&larr; Clear search</a>
+            @endif
+        </div>
+        <form method="GET" action="{{ route('admin.post.showAll') }}" class="flex flex-row">
+            <select name="option" id="option" class="mr-2 text-xs rounded-md">
+                <option value="id">Id</option>
+                <option value="name">Author</option>
+                <option value="title">Title</option>
+                <option value="description">Description</option>
+                <option value="category">Category</option>
+                <option value="tag">Tag</option>
+                <option value="name_id">Author Id</option>
+                <option value="category_id">Category Id</option>
+                <option value="tag_id">Tag Id</option>
+            </select>
+            <input type="text" required name="search" id="search" placeholder="Search..." class="rounded-tl-md rounded-bl-md text-sm pl-1">
+            <button class="rounded-tr-md rounded-br-md bg-indigo-600 px-3 py-1 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Search</button>
+        </form>
     </div>
 
     <div class="w-4/5 m-auto mt-5 bg-slate-100">

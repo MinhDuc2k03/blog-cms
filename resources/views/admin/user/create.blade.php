@@ -13,7 +13,7 @@
         <form class="space-y-6" action="{{ route('admin.tag.create.post') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
-            {{-- TAG'S NAME --}}
+            {{-- USER'S NAME --}}
             <div>
                 <div class="flex mb-1">
                     <label for="name" class="block text-sm font-medium leading-6 text-gray-900">Name</label>
@@ -22,19 +22,32 @@
                 <div class="mt-2">
                     <input type="text" name="name" class="pl-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                 </div>
-                <div class="text-sm mt-1.5 text-slate-600">Slug will be automatically generated from the tag's name.</div>
                 <div class="text-red-500 select-none mt-3 ml-1 text-sm">{{ $errors->first('name') }}</div>
             </div>
 
-            {{-- TAG'S SLUG --}}
-            {{-- <div>
+            {{-- USER'S EMAIL --}}
+            <div>
                 <div class="flex mb-1">
-                    <label for="slug" class="block text-sm font-medium leading-6 text-gray-900">Slug</label>
-                </div>  
-                <div class="mt-2">
-                    <input type="text" name="slug" class="pl-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                    <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email</label>
+                    <div class="text-red-500 select-none ml-1" data-twe-toggle="tooltip" title="This field is required">*</div>
                 </div>
-            </div> --}}
+                <div class="mt-2">
+                    <input type="text" name="email" class="pl-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                </div>
+                <div class="text-red-500 select-none mt-3 ml-1 text-sm">{{ $errors->first('email') }}</div>
+            </div>
+
+            {{-- USER'S PASSWORD --}}
+            <div>
+                <div class="flex mb-1">
+                    <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
+                    <div class="text-red-500 select-none ml-1" data-twe-toggle="tooltip" title="This field is required">*</div>
+                </div>
+                <div class="mt-2">
+                    <input type="password" name="password" class="pl-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                </div>
+                <div class="text-red-500 select-none mt-3 ml-1 text-sm">{{ $errors->first('password') }}</div>
+            </div>
 
             {{-- SUBMIT BUTTON --}}
             <div>

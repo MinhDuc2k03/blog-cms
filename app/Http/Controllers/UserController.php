@@ -16,7 +16,7 @@ class UserController extends Controller
     public function store(Request $request) {
         
 
-        if (Auth::user()->role == 1) {
+        if (Auth::user()->role != 0) {
             return redirect(route('admin.user.showAll'))->with('message', 'User successfully created');
         }
     }

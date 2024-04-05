@@ -16,6 +16,10 @@
             <table class="w-full divide-y dark:divide-gray-700 text-sm table-fixed">
                 <tbody class="divide-y dark:divide-gray-700">
                     <tr>
+                        <td class="font-semibold px-4 py-3 w-24 bg-slate-200">Id:</td>
+                        <td class="px-4 py-3">{{$tag->id}}</td>
+                    </tr>
+                    <tr>
                         <td class="font-semibold px-4 py-3 w-24 bg-slate-200">Name:</td>
                         <td class="px-4 py-3">{{$tag->name}}</td>
                     </tr>

@@ -24,16 +24,16 @@
 
             <div class="text-sm hidden lg:flex">
                 <div class="mr-10 ml-10">
-                    <a href="" class="opacity-50 transition duration-150 hover:opacity-100">Mua nhà</a>
+                    <a href="" class="opacity-50 transition duration-150 hover:opacity-100 line-clamp-1">Mua nhà</a>
                 </div>
                 <div class="mr-10">
-                    <a href="" class="opacity-50 transition duration-150 hover:opacity-100">Thuê nhà</a>
+                    <a href="" class="opacity-50 transition duration-150 hover:opacity-100 line-clamp-1">Thuê nhà</a>
                 </div>
                 <div class="mr-10">
-                    <a href="" class="opacity-50 transition duration-150 hover:opacity-100">Khám phá</a>
+                    <a href="" class="opacity-50 transition duration-150 hover:opacity-100 line-clamp-1">Khám phá</a>
                 </div>
                 <div class="mr-10">
-                    <a href="" class="pb-1 border-b-2 border-red-600">Blog</a>
+                    <a href="" class="pb-1 border-b-2 border-red-600 line-clamp-1">Blog</a>
                 </div>
             </div>
 
@@ -54,7 +54,11 @@
                         </button>
                     </div>
                 @endif
-                <a href="{{ route('create.post') }}" class="hidden lg:block ml-4 text-base text-white bg-red-600 transition duration-150 hover:bg-red-900 px-6 py-2 rounded-full line-clamp-1">Create post</a>
+                <a href="{{ route('create.post') }}" class="hidden lg:block ml-4 text-base text-white bg-red-600 transition duration-150 hover:bg-red-900 px-6 py-2 rounded-full line-clamp-1">
+                    <div class="line-clamp-1"> 
+                        Create post
+                    </div>
+                </a>
                 @if (auth()->user() != null)
                     <div class="ml-6 relative">
                         <button class="flex" id="button-user-open">
@@ -63,9 +67,9 @@
                                 <div class="text-right text-xs opacity-50">{{'@'}}{{auth()->user()->name}}</div>
                             </div>
                             @if (auth()->user()->profile_picture == null)
-                                <img class="mr-6 md:mr-12 w-10 h-10 rounded-full" src="{{ asset('assets/' .  'DefaultProfilePicture.jpg') }}">
+                                <img class="mr-6 md:mr-12 w-10 h-10 rounded-full object-cover" src="{{ asset('assets/' .  'DefaultProfilePicture.jpg') }}">
                             @else
-                                <img class="mr-6 md:mr-12 w-10 h-10 rounded-full" src="{{ asset('profiles/' .  auth()->user()->profile_picture) }}">
+                                <img class="mr-6 md:mr-12 w-10 h-10 rounded-full object-cover" src="{{ asset('profiles/' .  auth()->user()->profile_picture) }}">
                             @endif
                         </button>
                         <div id="user-dropdown" class="hidden">

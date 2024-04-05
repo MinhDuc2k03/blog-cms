@@ -28,7 +28,7 @@ class CategoryController extends Controller
             'slug' => $slug,
         ]);
 
-        if (Auth::user()->role == 1) {
+        if (Auth::user()->role != 0) {
             return redirect(route('admin.category.showAll'))->with('message', 'Category successfully created');
         } else {
             return redirect(route('home'))->with('message', 'Category successfully created');

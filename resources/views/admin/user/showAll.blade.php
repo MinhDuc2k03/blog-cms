@@ -38,7 +38,7 @@
     @endif
 
     <div class="sm:mx-auto sm:w-4/5 flex mt-12 gap-1.5 items-baseline w-4/5">
-        <a href="{{route('admin.user.create')}}" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Create User</a>
+        <a href="{{route('admin.user.create')}}" class="rounded-md bg-indigo-600 px-3 py-1 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Create User</a>
     </div>
 
     <div class="w-4/5 m-auto mt-5 bg-slate-100">
@@ -60,9 +60,11 @@
                     <td class="px-3 py-3 border border-black">{{$user->name}}</td>
                     <td class="px-3 py-3 border border-black">{{$user->display_name}}</td>
                     <td class="px-3 py-3 border border-black">{{$user->email}}</td>
-                    @if ($user->role == 1)
+                    @if ($user->role == 2)
+                        <td class="px-3 py-3 border border-black">Super Admin</td>
+                    @elseif ($user->role == 1)
                         <td class="px-3 py-3 border border-black">Admin</td>
-                    @else
+                    @elseif ($user->role == 0)
                         <td class="px-3 py-3 border border-black">User</td>
                     @endif
                     

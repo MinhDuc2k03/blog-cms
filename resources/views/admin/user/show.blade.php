@@ -20,6 +20,14 @@
                         <td class="px-4 py-3">{{$user->name}}</td>
                     </tr>
                     <tr>
+                        <td class="font-semibold px-4 py-3 w-24 bg-slate-200">Display name:</td>
+                        <td class="px-4 py-3">{{$user->display_name}}</td>
+                    </tr>
+                    <tr>
+                        <td class="font-semibold px-4 py-3 w-24 bg-slate-200">Email:</td>
+                        <td class="px-4 py-3">{{$user->email}}</td>
+                    </tr>
+                    <tr>
                         <td class="font-semibold px-4 py-3 w-24 bg-slate-200">Created at:</td>
                         <td class="px-4 py-3">{{$user->created_at}}</td>
                     </tr>

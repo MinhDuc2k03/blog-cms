@@ -16,7 +16,7 @@
                 <div class="h-fit pb-4 overflow-y-auto bg-gray-800">
                     <ul>
                         <li class="bg-gray-800 hover:bg-gray-700 pl-3 py-3">
-                            <a href="" class="text-white hover:text-slate-300 text-lg">Dashboard</a>
+                            <a href="{{ route('admin.dashboard') }}" class="text-white hover:text-slate-300 text-lg">Dashboard</a>
                         </li>
                         <li class="bg-gray-800 hover:bg-gray-700 pl-3 py-3 group">
                             <div class="text-white text-lg select-none">Blog</div>

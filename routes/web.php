@@ -10,6 +10,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\User\UserController;
 
+use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminPostController;
 use App\Http\Controllers\Admin\AdminCategoryController;
 use App\Http\Controllers\Admin\AdminTagController;
@@ -63,8 +64,8 @@ Route::delete('/post/{id}', [PostController::class, 'destroyPost'])->name('delet
 //ADMIN
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth.admin']], function() {
 
-    //POST HOME
-    Route::get('/', [AdminPostController::class, 'adminIndex'])->name('index');
+    //DASHBOARD HOME
+    Route::get('/', [AdminDashboardController::class, 'dashboardShowAll'])->name('dashboard');
     
     //POST SHOW
     Route::get('/post/{id}/show', [AdminPostController::class, 'postShow'])->name('post.show');
