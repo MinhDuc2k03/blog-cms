@@ -30,18 +30,6 @@
         <p class="ml-5 text-lg font-semibold">
             <a href="" class="w-full h-full">Posts</a>
         </p>
-        {{-- <p class="ml-5 text-lg font-semibold">
-            <a href="" class="w-full h-full">a1</a>
-        </p>
-        <p class="ml-5 text-lg font-semibold">
-            <a href="" class="w-full h-full">a2</a>
-        </p>
-        <p class="ml-5 text-lg font-semibold">
-            <a href="" class="w-full h-full">a3</a>
-        </p>
-        <p class="ml-5 text-lg font-semibold">
-            <a href="" class="w-full h-full">a4</a>
-        </p> --}}
     </div>
     <div class="my-10"></div>
     @foreach ($posts as $key => $post)
@@ -49,7 +37,7 @@
         <div class="flex flex-col ">
             <a href="{{route('post.show', $post->id)}}" class="text-sm mb-1 line-clamp-2 no-underline hover:underline">{{$post->title}}</a>
             <div class="flex overflow-hidden mb-2 text-xs">
-                <a href="" class="text-green-700">{{$post->category->name}}</a>
+                <a href="{{route('home', ['category_id' => $post->category->id])}}" class="text-green-700">{{$post->category->name}}</a>
                 <div class="select-none">&nbsp•&nbsp</div>
                 <a href="">{{$post->user->display_name}}</a>
                 <div class="select-none">&nbsp•&nbsp</div>

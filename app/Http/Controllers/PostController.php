@@ -41,22 +41,28 @@ class PostController extends Controller
         $tagIDs = [];
         if($request->filled('tag')) {
             $array = explode(',', $request->tag);
+            $array = array_map('trim', $array);
+            $array = array_unique($array);
             
             foreach ($array as $key => $word) {
-                $array[$key] = Str::slug($word, '-');
-
-                if ($array[$key] == '') {
+                if (empty(strlen($array[$key]))) {
                     unset($array[$key]);
                     continue;
                 };
 
-                if ($tagSlug = Tag::where('slug', $array[$key])->first())
-                {
-                    array_push($tagIDs, $tagSlug->id);
+                if (is_null(Tag::where('name', $array[$key])->first())) {
+                    $tag = Tag::create([
+                        'name' => $array[$key],
+                        'slug' => Str::slug($array[$key], '-'),
+                    ]);
+                    array_push($tagIDs, $tag->id);
+                } else {
+                    array_push($tagIDs, Tag::where('name', $array[$key])->first()->id);
                 }
             };
+            
+            sort($tagIDs);
         }
-        sort($tagIDs);
 
         if (is_null(Category::Where('name', $request->category)->first())) {
             $category = Category::create([
@@ -110,23 +116,28 @@ class PostController extends Controller
         $tagIDs = [];
         if($request->filled('tag')) {
             $array = explode(',', $request->tag);
+            $array = array_map('trim', $array);
+            $array = array_unique($array);
             
             foreach ($array as $key => $word) {
-                $array[$key] = Str::slug($word, '-');
-
-                if ($array[$key] == '') {
+                if (empty(strlen($array[$key]))) {
                     unset($array[$key]);
                     continue;
                 };
 
-                if ($tagSlug = Tag::where('slug', $array[$key])->first())
-                {
-                    array_push($tagIDs, $tagSlug->id);
+                if (is_null(Tag::where('name', $array[$key])->first())) {
+                    $tag = Tag::create([
+                        'name' => $array[$key],
+                        'slug' => Str::slug($array[$key], '-'),
+                    ]);
+                    array_push($tagIDs, $tag->id);
+                } else {
+                    array_push($tagIDs, Tag::where('name', $array[$key])->first()->id);
                 }
             };
+            
+            sort($tagIDs);
         }
-
-        sort($tagIDs);
 
 
         $request->validated();
@@ -138,9 +149,8 @@ class PostController extends Controller
         $data['slug'] = $slug;
 
         $post = Post::where('id', $id)->update($data);
-        if ($tagIDs != []) {
-            $post->tags()->sync($tagIDs);
-        }
+        Post::where('id', $id)->first()->tags()->sync($tagIDs);
+
         
         $posts = Post::all();
         return redirect()->route('home')->with(['posts' => $posts]);
@@ -160,6 +170,8 @@ class PostController extends Controller
 
             $thumbnailName = time() . '_' . Str::slug($request->title, '_') . '.' . $request->thumbnail->extension();
             $request->thumbnail->move(public_path('thumbnails'), $thumbnailName);
+
+            $data['thumbnail'] = $thumbnailName;
         }
 
         $slug = Str::slug($request->title, '-');
@@ -167,23 +179,28 @@ class PostController extends Controller
         $tagIDs = [];
         if($request->filled('tag')) {
             $array = explode(',', $request->tag);
+            $array = array_map('trim', $array);
+            $array = array_unique($array);
             
             foreach ($array as $key => $word) {
-                $array[$key] = Str::slug($word, '-');
-
-                if ($array[$key] == '') {
+                if (empty(strlen($array[$key]))) {
                     unset($array[$key]);
                     continue;
                 };
 
-                if ($tagSlug = Tag::where('slug', $array[$key])->first())
-                {
-                    array_push($tagIDs, $tagSlug->id);
+                if (is_null(Tag::where('name', $array[$key])->first())) {
+                    $tag = Tag::create([
+                        'name' => $array[$key],
+                        'slug' => Str::slug($array[$key], '-'),
+                    ]);
+                    array_push($tagIDs, $tag->id);
+                } else {
+                    array_push($tagIDs, Tag::where('name', $array[$key])->first()->id);
                 }
-                
             };
+            
+            sort($tagIDs);
         }
-        sort($tagIDs);
 
 
         $request->validated();
@@ -194,12 +211,9 @@ class PostController extends Controller
         $data['post'] = $request->post;
         $data['category_id'] = Category::Where('name', $request->category)->first()->id;
         $data['slug'] = $slug;
-        $data['thumbnail'] = $thumbnailName;
 
         $post->update($data);
-        if ($tagIDs != []) {
-            $post->tags()->sync($tagIDs);
-        }
+        Post::where('id', $id)->first()->tags()->tags()->sync($tagIDs);
 
         $posts = Post::all();
         return redirect()->route('admin.post.showAll')->with(['posts' => $posts]);

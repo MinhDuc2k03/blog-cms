@@ -92,16 +92,14 @@
     </div> --}}
 
     <div class="flex gap-3 mb-10">
-        @if ($post->tag)
-            <div>
-                <button class="px-4 sm:px-9 py-1.5 bg-gray-300 transition duration-150 hover:bg-gray-400 rounded-full text-xs sm:text-base font-normal">#Keyword 1</button>
-            </div>
-            <div>
-                <button class="px-4 sm:px-9 py-1.5 bg-gray-300 transition duration-150 hover:bg-gray-400 rounded-full text-xs sm:text-base font-normal">#Keyword 2</button>
-            </div>
+        @if ($post->tags)
+            @foreach ($post->tags as $tag)
+                <div>
+                    <button class="px-4 sm:px-9 py-1.5 bg-gray-300 transition duration-150 hover:bg-gray-400 rounded-full text-xs sm:text-base font-normal">#{{$tag->name}}</button>
+                </div>
+            @endforeach
         @endif
     </div>
-
     @if ($categoryPosts->count() > 1)
     <div class="flex justify-between mb-10">
         <div class="flex text-sm">
@@ -205,7 +203,6 @@
                             <div class="hidden overflow-hidden whitespace-nowrap mb-4 sm:mb-4 sm:flex ">
                                 <a href="{{route('home', ['category_id' => $hotPost->category->id])}}" class="text-green-700">{{$hotPost->category->name}}</a>
                                 <div class="select-none">&nbsp•&nbsp</div>
-                                
                                 <a href="{{ route('profile.show', $hotPost->user->name) }}">{{$hotPost->user->display_name}}</a>
                                 <div class="select-none">&nbsp•&nbsp</div>
                                 <div class="opacity-50">{{$hotPost->created_at->format('d/m/Y')}}</div>
