@@ -11,10 +11,23 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use App\Models\User;
 
-class UserController extends Controller
+class UserProfileController extends Controller
 {
     public function store(Request $request) {
+        $request->validate([
+            'name' => ['required'],
+            'email' => ['required', 'email', 'unique:users'],
+            'password' => ['required', 'same:password_confirmation'],
+            'password_confirmation' => ['required'],
+        ]);
         
+        $data['name'] = Str::slug($request->name, '_');
+        $data['display_name'] = $request->name;
+        $data['email'] = $request->email;
+        $data['password'] = Hash::make($request->password);
+        $data['role'] = $request->role;
+
+        $user = User::create($data);
 
         if (Auth::user()->role != 0) {
             return redirect(route('admin.user.showAll'))->with('message', 'User successfully created');
@@ -25,19 +38,13 @@ class UserController extends Controller
     {
         $user = User::where('id', $id);
         $user->update([
-            'display_name' => $request->input('display_name'),
+            'display_name' => $request->display_name,
+            'role' => $request->role,
         ]);
 
         $users = User::all();
         return redirect()->route('admin.user.showAll')->with(['users' => $users]);
     }
-
-    // public function destroyUser(string $id)
-    // {
-    //     User::find($id)->delete();
-    //     $users = User::all();
-    //     return redirect()->route('admin.user.showAll')->with(['users' => $users]);
-    // }
 
     public function userShow(string $id)
     {

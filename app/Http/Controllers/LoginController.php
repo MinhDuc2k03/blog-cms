@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Validation\ValidationException;
 
 use App\Http\Requests\LoginFormRequest;
 
@@ -36,14 +37,19 @@ class LoginController extends Controller
         $request->validated();
         
         $credentials = $request->only('email', 'password');
+        
 
         if (Auth::attempt($credentials, $request->remember)) {
             if (parse_url(session()->get('url.intended'), PHP_URL_PATH) == '/admin/posts' && Auth::user()->role == 0) {
                 return redirect(route('home'));
             }
             return redirect()->intended();
+        } else {
+            $error = ValidationException::withMessages([
+                'password' => 'Wrong password, try again.',
+            ]);
+            throw $error;
         }
-        return redirect(route('login'))->with('error', 'Wrong email or password. Try again.');
     }
 
 

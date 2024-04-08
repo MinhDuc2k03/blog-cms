@@ -28,6 +28,17 @@
                         <td class="px-4 py-3">{{$user->email}}</td>
                     </tr>
                     <tr>
+                        <td class="font-semibold px-4 py-3 w-24 bg-slate-200">Role:</td>
+                        @if ($user->role == 2)
+                            <td class="px-4 py-3">Super Admin</td>
+                        @elseif ($user->role == 1)
+                            <td class="px-4 py-3">Admin</td>
+                        @elseif ($user->role == 0)
+                            <td class="px-4 py-3">User</td>
+                        @endif
+                    </tr>
+                    
+                    <tr>
                         <td class="font-semibold px-4 py-3 w-24 bg-slate-200">Created at:</td>
                         <td class="px-4 py-3">{{$user->created_at}}</td>
                     </tr>

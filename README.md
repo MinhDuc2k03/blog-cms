@@ -15,18 +15,20 @@ Step 4: Chạy `cp .env.example .env`
 
 Step 4: Chạy `php artisan key:generate`
 
-Step 5: Đổi tên trong file .env và chạy `php artisan migrate`
+Step 5: Đổi tên trong file .env và chạy `php artisan migrate` để tạo database
 
 Step 6: Bắt đầu server bằng `php artisan serve` và `npm run dev`
 
 
 ### Đăng nhập vào tk admin
-Tài khoản: admin@example.com
+Tài khoản: admin@example.com<br>
 Password: 12345
 
 
 ### Các route cho admin
 
+ - /admin: Trang admin cho dashboard
  - /admin/post: Trang admin cho các bài viết
  - /admin/cagetory: Trang admin cho các mục
  - /admin/tag: Trang admin cho các tag
+ - /admin/user: Trang admin cho các người dùng

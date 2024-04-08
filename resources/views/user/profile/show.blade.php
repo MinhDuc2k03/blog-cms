@@ -18,10 +18,12 @@
                 <div class="text-base opacity-50">{{'@'}}{{$user->name}}</div>
             </div>
         </div>
-        @if (auth()->user()->id == $user->id)
+        @if (auth()->check())
+            @if (auth()->user()->id == $user->id)
             <div>
                 <a href="{{ route('profile.edit', $user->name) }}" class="text-sm mr-10 md:mr-40 bg-white px-3 py-1.5 text-gray-500 border-2 border-gray-500 rounded-md hover:bg-gray-500 hover:text-white">Edit profile</a>
             </div>
+            @endif
         @endif
     </div>
     <div class="shadow-md h-12 w-full bg-white border-b-2 flex items-center">

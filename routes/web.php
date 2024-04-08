@@ -8,6 +8,7 @@ use App\Http\Controllers\User\UserPostController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\User\UserController;
 
 use App\Http\Controllers\Admin\AdminDashboardController;
@@ -134,15 +135,15 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth.admi
 
     //USER CREATE
     Route::get('/user/create', [AdminUserController::class, 'userCreate'])->name('user.create');
-    Route::post('/user/create', [UserController::class, 'store'])->name('user.create.post');
+    Route::post('/user/create', [UserProfileController::class, 'store'])->name('user.create.post');
 
     //USER SHOW
     Route::get('/user/{id}/show', [AdminUserController::class, 'userShow'])->name('user.show');
 
     //USER EDIT
     Route::get('/user/{id}/edit', [AdminUserController::class, 'userEdit'])->name('user.edit');
-    Route::put('/user/{id}/edit', [UserController::class, 'adminUpdateUser'])->name('user.update');
+    Route::put('/user/{id}/edit', [UserProfileController::class, 'adminUpdateUser'])->name('user.update');
 
     //USER DELETE
-    // Route::delete('/user/{id}', [UserController::class, 'destroyUser'])->name('user.delete');
+    // Route::delete('/user/{id}', [UserProfileController::class, 'destroyUser'])->name('user.delete');
 });

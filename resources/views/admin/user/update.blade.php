@@ -28,6 +28,21 @@
                 @endif
             </div>
 
+            {{-- USER'S ROLE --}}
+            <div>
+                <label for="role" class="block text-sm font-medium leading-6 text-gray-900">Role</label>
+                <div>
+                    @if (Auth::user()->role=="2")
+                    <input type="radio" id="2" name="role" value="2" class="ml-3" {{$user->role=="2" ? 'checked' : ''}}>
+                    <label for="2">Super Admin</label><br>
+                    @endif
+                    <input type="radio" id="1" name="role" value="1" class="ml-3" {{$user->role=="1" ? 'checked' : ''}}>
+                    <label for="1">Admin</label><br>
+                    <input type="radio" id="0" name="role" value="0" class="ml-3" {{$user->role=="0" ? 'checked' : ''}}>
+                    <label for="0">User</label>
+                </div>
+            </div>
+
             @if (session()->has('error'))
                 <li class="text-red-600 list-none text-sm">
                     {{session('error')}}

@@ -73,9 +73,12 @@
                             <div>
                                 <a href="{{ route('admin.user.show', $user->id) }}" class="select-none text-xs font-semibold text-purple-600 hover:text-purple-950 hover:drop-shadow-2xl hover:underline">View</a>
                             </div>
+                            @if ((Auth::user()->role == 2 && $user->role != 2) || (Auth::user()->role== 1 && $user->role == 0))
                             <div>
                                 <a href="{{ route('admin.user.edit', $user->id) }}" class="select-none text-xs font-semibold text-purple-600 hover:text-purple-950 hover:drop-shadow-2xl hover:underline">Edit</a>
-                            </div>
+                            </div> 
+                            @endif
+                            
                             {{-- <form action="{{ route('admin.user.delete', $user->id) }}" method="POST">
                                 @csrf
                                 @method('delete')

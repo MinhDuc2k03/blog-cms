@@ -21,9 +21,9 @@ class UserPostController extends Controller
         }
 
         if ($request->filled('category_id')) {
-            $posts = Post::where('category_id', $request->input('category_id'))->get();
+            $posts = Post::where('category_id', $request->category_id)->get();
         } elseif ($request->filled('author_id')) {
-            $posts = Post::where('author_id', $request->input('author_id'))->get();
+            $posts = Post::where('author_id', $request->author_id)->get();
         } else {
             $posts = Post::all();
         }

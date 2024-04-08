@@ -38,15 +38,15 @@ class UserController extends Controller
                 Storage::delete(User::where('name', $name)->first()->profile_picture);
             }
 
-            $pfpName = time() . '_' . Str::slug($request->input('name'), '_') . '.' . $request->profile_picture->extension();
+            $pfpName = time() . '_' . Str::slug($request->name, '_') . '.' . $request->profile_picture->extension();
             $request->profile_picture->move(public_path('profiles'), $pfpName);
         }
 
 
 
-        if ($request->input('new_pass') != '') {
+        if ($request->new_pass != '') {
             if ((Hash::check($request->get('new_pass'), Auth::user()->password))
-            || ($request->input('new_pass') != $request->input('new_pass_confirmation'))
+            || ($request->new_pass != $request->new_pass_confirmation)
             || (!Hash::check($request->get('old_pass'), Auth::user()->password)))
             {
                 return redirect()->back();
@@ -56,9 +56,9 @@ class UserController extends Controller
         $request->validated();
 
         if ($request->hasFile('profile_picture')) {$data['profile_picture'] = $pfpName;}
-        $data['display_name'] = $request->input('display_name');
-        $data['email'] = $request->input('email');
-        if ($request->input('new_pass') != '') {$data['password'] = Hash::make($request->input('new_pass'));}
+        $data['display_name'] = $request->display_name;
+        $data['email'] = $request->email;
+        if ($request->new_pass != '') {$data['password'] = Hash::make($request->new_pass);}
 
         User::where('name', $name)->first()->update($data);
 

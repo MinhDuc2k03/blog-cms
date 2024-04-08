@@ -190,7 +190,11 @@
                     <div class="flex gap-4 h-24 sm:h-56">
                         <div class="relative max-w-full">
                             <a href="{{route('post.show', $hotPost->id)}}">
-                                <img src="{{ asset('thumbnails/' .  $hotPost->thumbnail) }}" class="object-cover rounded-2xl w-36 h-24 sm:w-80 sm:h-52">
+                                @if ($hotPost->thumbnail != null)
+                                    <img src="{{ asset('thumbnails/' .  $hotPost->thumbnail) }}" class="object-cover rounded-2xl w-36 h-24 sm:w-80 sm:h-52">
+                                @else
+                                    <img src="{{ asset('assets/' . 'blank.png') }}" class="object-cover rounded-2xl w-36 h-24 sm:w-80 sm:h-52">
+                                @endif
                             </a>
                             <button class="absolute bottom-4 left-4 sm:top-5 sm:right-5 sm:bottom-auto sm:left-auto">
                                 <img src="{{ asset('assets/' . 'heart_unselected.png') }}" class="h-6">
@@ -201,7 +205,8 @@
                             <div class="hidden overflow-hidden whitespace-nowrap mb-4 sm:mb-4 sm:flex ">
                                 <a href="{{route('home', ['category_id' => $hotPost->category->id])}}" class="text-green-700">{{$hotPost->category->name}}</a>
                                 <div class="select-none">&nbsp•&nbsp</div>
-                                <a href="{{route('home', ['author_id' => $hotPost->author_id])}}">{{$hotPost->user->display_name}}</a>
+                                
+                                <a href="{{ route('profile.show', $hotPost->user->name) }}">{{$hotPost->user->display_name}}</a>
                                 <div class="select-none">&nbsp•&nbsp</div>
                                 <div class="opacity-50">{{$hotPost->created_at->format('d/m/Y')}}</div>
                             </div>

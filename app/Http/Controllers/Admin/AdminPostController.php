@@ -20,43 +20,43 @@ class AdminPostController extends Controller
     public function postShowAll(Request $request) {
         $posts = [];
 
-        if ($request->input('option') == 'category') {
-            if (Category::find(Category::where('name', $request->input('search'))->first()) != null) {
-                $posts = Category::find(Category::where('name', $request->input('search'))->first()->id)->posts;
+        if ($request->option == 'category') {
+            if (Category::find(Category::where('name', $request->search)->first()) != null) {
+                $posts = Category::find(Category::where('name', $request->search)->first()->id)->posts;
             }
         }
 
-        if ($request->input('option') == 'tag') {
-            if (Tag::find(Tag::where('name', $request->input('search'))->first()) != null) {
-                $posts = Tag::find(Tag::where('name', $request->input('search'))->first()->id)->posts;
+        if ($request->option == 'tag') {
+            if (Tag::find(Tag::where('name', $request->search)->first()) != null) {
+                $posts = Tag::find(Tag::where('name', $request->search)->first()->id)->posts;
             }
         }
 
-        if ($request->input('option') == 'name') {
-            $posts = User::find(User::where('name', $request->input('search'))->first()->id)->posts;
+        if ($request->option == 'name') {
+            $posts = User::find(User::where('name', $request->search)->first()->id)->posts;
         }
 
-        if ($request->input('option') == 'name_id') {
-            $posts = User::find(User::where('id', $request->input('search'))->first()->id)->posts;
+        if ($request->option == 'name_id') {
+            $posts = User::find(User::where('id', $request->search)->first()->id)->posts;
         }
 
-        if ($request->input('option') == 'title') {
-            $posts = Post::where('title', $request->input('search'))->get();
+        if ($request->option == 'title') {
+            $posts = Post::where('title', $request->search)->get();
         }
 
-        if ($request->input('option') == 'description') {
-            $posts = Post::where('description', $request->input('search'))->get();
+        if ($request->option == 'description') {
+            $posts = Post::where('description', $request->search)->get();
         }
 
-        if ($request->input('option') == 'tag_id') {
-            if (Tag::find($request->input('search')) != null) {
-                $posts = Tag::find($request->input('search'))->posts;
+        if ($request->option == 'tag_id') {
+            if (Tag::find($request->search) != null) {
+                $posts = Tag::find($request->search)->posts;
             }
         }
 
-        if ($request->input('option') == 'category_id') {
-            if (Category::where('id', $request->input('search'))->count() != 0) {
-                $posts = Category::with('posts')->find($request->input('search'))->posts;
+        if ($request->option == 'category_id') {
+            if (Category::where('id', $request->search)->count() != 0) {
+                $posts = Category::with('posts')->find($request->search)->posts;
             }
         }
 
@@ -64,7 +64,7 @@ class AdminPostController extends Controller
             $posts = Post::all();
         }
         
-    //    $posts = Tag::with('posts')->find($request->input('tag_id'))->posts;
+    //    $posts = Tag::with('posts')->find($request->tag_id)->posts;
     //    $posts = Post::all();
 
         if (Auth::check()) {
@@ -143,15 +143,15 @@ class AdminPostController extends Controller
     //         $request->thumbnail->move(public_path('thumbnails'), $thumbnailName);
     //     }
 
-    //     $slug = Str::slug($request->input('title'), '-');
+    //     $slug = Str::slug($request->title, '-');
 
     //     $request->validated();
     //     $car = Post::where('id', $id)
     //         ->update([
-    //         'title' => $request->input('title'),
-    //         'description' => $request->input('description'),
+    //         'title' => $request->title,
+    //         'description' => $request->description,
     //         'thumbnail' => $thumbnailName,
-    //         'post' => $request->input('post'),
+    //         'post' => $request->post,
     //         'slug' => $slug,
     //     ]);
         

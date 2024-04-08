@@ -54,6 +54,7 @@
                 <div class="mt-2">
                     <input type="text" name="category" class="pl-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                 </div>
+                <div class="text-sm mt-1.5 text-slate-600">The category will automatically be created if it does not exist.</div>
                 <div class="text-red-500 select-none mt-3 ml-1 text-sm">{{ $errors->first('category') }}</div>
             </div>
 
@@ -65,8 +66,9 @@
                 <div class="mt-2">
                     <input type="text" name="tag" class="pl-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                 </div>
+                <div class="text-sm mt-1.5 text-slate-600">Type "," if you want to add multiple tags.</div>
             </div>
-
+            
             {{-- POST'S BODY --}}
             <div>
                 <div class="flex mb-1">

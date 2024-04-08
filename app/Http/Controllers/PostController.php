@@ -22,7 +22,7 @@ use App\Models\Category;
 class PostController extends Controller
 {
     public function store(PostFormRequest $request) {
-        $slug = Str::slug($request->input('title'), '-');
+        $slug = Str::slug($request->title, '-');
 
         $duplicate = 0;
         $newSlug = $slug;
@@ -34,13 +34,13 @@ class PostController extends Controller
 
         $thumbnailName = '';
         if ($request->hasFile('thumbnail')) {
-            $thumbnailName = time() . '_' . Str::slug($request->input('title'), '_') . '.' . $request->thumbnail->extension();
+            $thumbnailName = time() . '_' . Str::slug($request->title, '_') . '.' . $request->thumbnail->extension();
             $request->thumbnail->move(public_path('thumbnails'), $thumbnailName);
         }
 
         $tagIDs = [];
         if($request->filled('tag')) {
-            $array = explode(',', $request->input('tag'));
+            $array = explode(',', $request->tag);
             
             foreach ($array as $key => $word) {
                 $array[$key] = Str::slug($word, '-');
@@ -58,18 +58,25 @@ class PostController extends Controller
         }
         sort($tagIDs);
 
-        // dd(Category::Where('name', $request->input('category'))->first()->id);
-
+        if (is_null(Category::Where('name', $request->category)->first())) {
+            $category = Category::create([
+                'name' => $request->category,
+                'slug' => Str::slug($request->category, '_'),
+            ]);
+            $data['category_id'] = $category->id;
+        } else {
+            $data['category_id'] = Category::Where('name', $request->category)->first()->id;
+        }
+        
         $request->validated();
-        $post = Post::create([
-            'title' => $request->input('title'),
-            'description' => $request->input('description'),
-            'thumbnail' => $thumbnailName,
-            'post' => $request->input('post'),
-            'author_id' => Auth::id(),
-            'category_id' => Category::Where('name', $request->input('category'))->first()->id,
-            'slug' => $slug,
-        ]);
+        $data['title'] = $request->title;
+        $data['description'] = $request->description;
+        $data['thumbnail'] = $thumbnailName;
+        $data['post'] = $request->post;
+        $data['author_id'] = Auth::id();
+        $data['slug'] = $slug;
+
+        $post = Post::create($data);
         $post->tags()->attach($tagIDs);
 
         if (parse_url(session()->get('url.intended'), PHP_URL_PATH) == '/admin/posts' && Auth::user()->role == 0) {
@@ -82,7 +89,7 @@ class PostController extends Controller
 
     public function userUpdatePost(PostFormRequest $request, string $id)
     {
-        $slug = Str::slug($request->input('title'), '-');
+        $slug = Str::slug($request->title, '-');
 
         $duplicate = 0;
         $newSlug = $slug;
@@ -96,13 +103,13 @@ class PostController extends Controller
         if ($request->hasFile('thumbnail')) {
             Storage::delete(Post::where('id', $id)->first()->thumbnail);
 
-            $thumbnailName = time() . '_' . Str::slug($request->input('title'), '_') . '.' . $request->thumbnail->extension();
+            $thumbnailName = time() . '_' . Str::slug($request->title, '_') . '.' . $request->thumbnail->extension();
             $request->thumbnail->move(public_path('thumbnails'), $thumbnailName);
         }
 
         $tagIDs = [];
         if($request->filled('tag')) {
-            $array = explode(',', $request->input('tag'));
+            $array = explode(',', $request->tag);
             
             foreach ($array as $key => $word) {
                 $array[$key] = Str::slug($word, '-');
@@ -118,20 +125,22 @@ class PostController extends Controller
                 }
             };
         }
+
         sort($tagIDs);
 
 
         $request->validated();
-        $post = Post::where('id', $id)
-            ->update([
-            'title' => $request->input('title'),
-            'description' => $request->input('description'),
-            'thumbnail' => $thumbnailName,
-            'post' => $request->input('post'),
-            'category_id' => Category::Where('name', $request->input('category'))->first()->id,
-            'slug' => $slug,
-        ]);
-        $post->tags()->sync($tagIDs);
+        $data['title'] = $request->title;
+        $data['description'] = $request->description;
+        $data['thumbnail'] = $thumbnailName;
+        $data['post'] = $request->post;
+        $data['category_id'] = Category::Where('name', $request->category)->first()->id;
+        $data['slug'] = $slug;
+
+        $post = Post::where('id', $id)->update($data);
+        if ($tagIDs != []) {
+            $post->tags()->sync($tagIDs);
+        }
         
         $posts = Post::all();
         return redirect()->route('home')->with(['posts' => $posts]);
@@ -149,15 +158,15 @@ class PostController extends Controller
                 unlink('thumbnails/' .  $oldThumbnail);
             }
 
-            $thumbnailName = time() . '_' . Str::slug($request->input('title'), '_') . '.' . $request->thumbnail->extension();
+            $thumbnailName = time() . '_' . Str::slug($request->title, '_') . '.' . $request->thumbnail->extension();
             $request->thumbnail->move(public_path('thumbnails'), $thumbnailName);
         }
 
-        $slug = Str::slug($request->input('title'), '-');
+        $slug = Str::slug($request->title, '-');
 
         $tagIDs = [];
         if($request->filled('tag')) {
-            $array = explode(',', $request->input('tag'));
+            $array = explode(',', $request->tag);
             
             foreach ($array as $key => $word) {
                 $array[$key] = Str::slug($word, '-');
@@ -180,26 +189,17 @@ class PostController extends Controller
         $request->validated();
 
         $post = Post::find($id);
-        if ($request->hasFile('thumbnail'))
-        {
-            $post->update([
-                'title' => $request->input('title'),
-                'description' => $request->input('description'),
-                'thumbnail' => $thumbnailName,
-                'category_id' => Category::Where('name', $request->input('category'))->first()->id,
-                'post' => $request->input('post'),
-                'slug' => $slug,
-            ]);
-        } else {
-            $post->update([
-                'title' => $request->input('title'),
-                'description' => $request->input('description'),
-                'category_id' => Category::Where('name', $request->input('category'))->first()->id,
-                'post' => $request->input('post'),
-                'slug' => $slug,
-            ]);
+        $data['title'] = $request->title;
+        $data['description'] = $request->description;
+        $data['post'] = $request->post;
+        $data['category_id'] = Category::Where('name', $request->category)->first()->id;
+        $data['slug'] = $slug;
+        $data['thumbnail'] = $thumbnailName;
+
+        $post->update($data);
+        if ($tagIDs != []) {
+            $post->tags()->sync($tagIDs);
         }
-        $post->tags()->sync($tagIDs);
 
         $posts = Post::all();
         return redirect()->route('admin.post.showAll')->with(['posts' => $posts]);

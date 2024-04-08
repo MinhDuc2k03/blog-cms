@@ -26,7 +26,7 @@
                         <div class="sm:hidden flex overflow-hidden mb-2 text-xs sm:mb-4 sm:text-sm">
                             <a href="" class="text-green-700">{{$post->category->name}}</a>
                             <div class="select-none">&nbsp•&nbsp</div>
-                            <a href="">{{$post->user->display_name}}</a>
+                            <a href="{{ route('profile.show', $post->user->name) }}">{{$post->user->display_name}}</a>
                             <div class="select-none">&nbsp•&nbsp</div>
                             <div class="opacity-50">{{$post->created_at->format('d/m/Y')}}</div>
                         </div>
@@ -48,7 +48,7 @@
                                 <div class="hidden overflow-hidden whitespace-nowrap mb-4 sm:mb-4 sm:flex ">
                                     <a href="" class="text-green-700">{{$post->category->name}}</a>
                                     <div class="select-none">&nbsp•&nbsp</div>
-                                    <a href="">{{$post->user->display_name}}</a>
+                                    <a href="{{ route('profile.show', $post->user->name) }}">{{$post->user->display_name}}</a>
                                     <div class="select-none">&nbsp•&nbsp</div>
                                     <div class="opacity-50">{{$post->created_at->format('d/m/Y')}}</div>
                                 </div>

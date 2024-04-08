@@ -17,15 +17,15 @@ class TagController extends Controller
     public function store(TagFormRequest $request) {
         $slug = '';
         if($request->filled('slug')) {
-            $slug = Str::slug($request->input('slug'), '-');
+            $slug = Str::slug($request->slug, '-');
         } else {
-            $slug = Str::slug($request->input('name'), '-');
+            $slug = Str::slug($request->name, '-');
         }
 
-        $tag = Tag::create([
-            'name' => $request->input('name'),
-            'slug' => $slug,
-        ]);
+        $data['name'] = $request->name;
+        $data['slug'] = $slug;
+
+        $tag = Tag::create($data);
 
         if (Auth::user()->role != 0) {
             return redirect(route('admin.tag.showAll'))->with('message', 'Tag successfully created');
@@ -38,18 +38,15 @@ class TagController extends Controller
     {
         $slug = '';
         if($request->filled('slug')) {
-            $slug = Str::slug($request->input('slug'), '-');
+            $slug = Str::slug($request->slug, '-');
         } else {
-            $slug = Str::slug($request->input('name'), '-');
+            $slug = Str::slug($request->name, '-');
         }
 
+        $data['name'] = $request->name;
+        $data['slug'] = $slug;
 
-
-        $tag = Tag::where('id', $id);
-        $tag->update([
-            'name' => $request->input('name'),
-            'slug' => $slug,
-        ]);
+        $tag = Tag::where('id', $id)->update($data);
 
         $tags = Tag::all();
         return redirect()->route('admin.tag.showAll')->with(['tags' => $tags]);

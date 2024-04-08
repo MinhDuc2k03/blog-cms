@@ -18,15 +18,15 @@ class CategoryController extends Controller
     public function store(CategoryFormRequest $request) {
         $slug = '';
         if($request->filled('slug')) {
-            $slug = Str::slug($request->input('slug'), '_');
+            $slug = Str::slug($request->slug, '_');
         } else {
-            $slug = Str::slug($request->input('name'), '_');
+            $slug = Str::slug($request->name, '_');
         }
 
-        $category = Category::create([
-            'name' => $request->input('name'),
-            'slug' => $slug,
-        ]);
+        $data['name'] = $request->name;
+        $data['slug'] = $slug;
+
+        $category = Category::create($data);
 
         if (Auth::user()->role != 0) {
             return redirect(route('admin.category.showAll'))->with('message', 'Category successfully created');
@@ -39,18 +39,15 @@ class CategoryController extends Controller
     {
         $slug = '';
         if($request->filled('slug')) {
-            $slug = Str::slug($request->input('slug'), '_');
+            $slug = Str::slug($request->slug, '_');
         } else {
-            $slug = Str::slug($request->input('name'), '_');
+            $slug = Str::slug($request->name, '_');
         }
 
+        $data['name'] = $request->name;
+        $data['slug'] = $slug;
 
-
-        $category = Category::where('id', $id);
-        $category->update([
-            'name' => $request->input('name'),
-            'slug' => $slug,
-        ]);
+        $category = Category::where('id', $id)->update($data);
 
         $categories = Category::all();
         return redirect()->route('admin.category.showAll')->with(['categories' => $categories]);
