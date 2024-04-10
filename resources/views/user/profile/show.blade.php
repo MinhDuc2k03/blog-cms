@@ -69,15 +69,19 @@
                 </div>
             </div>
         </div>
-        <div class="flex flex-col gap-2">
-            <a href="{{route('post.edit', $post->id)}}" class="text-sm mr-10 md:mr-40 bg-white px-3 py-1.5 text-gray-500 border-2 border-gray-500 rounded-md hover:bg-gray-500 hover:text-white">Edit post</a>
-            <form action="{{route('delete', $post->id)}}" method="POST">
-                @csrf
-                @method('delete')
-                <button type="submit" onclick="return confirm('Are you sure you want to delete this post?')" class="text-sm mr-10 md:mr-40 bg-white px-3 py-1.5 text-red-600 border-2 border-red-600 rounded-md hover:bg-red-600 hover:text-white">Delete post</button>
-            </form>
-            {{-- <a href="{{route('delete')}}" class="text-sm mr-10 md:mr-40 bg-white px-3 py-1.5 text-red-600 border-2 border-red-600 rounded-md hover:bg-red-600 hover:text-white">Delete post</a> --}}
-        </div>
+        @if (auth()->check())
+            @if (auth()->user()->id == $user->id)
+                <div class="flex flex-col gap-2">
+                    <a href="{{route('post.edit', $post->id)}}" class="text-sm mr-10 md:mr-40 bg-white px-3 py-1.5 text-gray-500 border-2 border-gray-500 rounded-md hover:bg-gray-500 hover:text-white">Edit post</a>
+                    <form action="{{route('delete', $post->id)}}" method="POST">
+                        @csrf
+                        @method('delete')
+                        <button type="submit" onclick="return confirm('Are you sure you want to delete this post?')" class="text-sm mr-10 md:mr-40 bg-white px-3 py-1.5 text-red-600 border-2 border-red-600 rounded-md hover:bg-red-600 hover:text-white">Delete post</button>
+                    </form>
+                    {{-- <a href="{{route('delete')}}" class="text-sm mr-10 md:mr-40 bg-white px-3 py-1.5 text-red-600 border-2 border-red-600 rounded-md hover:bg-red-600 hover:text-white">Delete post</a> --}}
+                </div>
+            @endif
+        @endif
     </div>
     @endforeach
 </div>

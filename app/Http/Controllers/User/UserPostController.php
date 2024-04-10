@@ -34,10 +34,22 @@ class UserPostController extends Controller
     public function postShow(string $id)
     {
         $post = Post::find($id);
+
+        $key = 'blog_' . $post->id;
+        if (!session()->has($key)) {
+            $post->increment('views');
+
+            session([$key => 1]);
+        }
+
         $categoryPosts = Post::where('category_id', $post->category->id)->get();
         $hotPosts = Post::take(2)->get();
 
-        return view('user.post.show')->with(['post' => $post, 'categoryPosts' => $categoryPosts, 'hotPosts' => $hotPosts]);
+        return view('user.post.show')->with([
+            'post' => $post,
+            'categoryPosts' => $categoryPosts,
+            'hotPosts' => $hotPosts
+        ]);
     }
 
     public function createPost() {

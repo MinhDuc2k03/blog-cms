@@ -37,7 +37,7 @@
                             @if ($post->thumbnail == '')
                                 <div class="select-none">-</div>
                             @else
-                                <img src="{{ asset('thumbnails/' .  $post->thumbnail) }}" class="transition-all w-24 hover:w-3/5" alt="">
+                                <img src="{{ asset('thumbnails/' .  $post->thumbnail) }}" class="transition-all w-24 hover:w-3/4" alt="">
                             @endif
                         </td>
                     </tr>
@@ -63,7 +63,7 @@
                     <tr>
                         <td class="font-semibold px-4 py-3 w-24 bg-slate-200">Content:</td>
                         <td class="px-4 py-3">
-                            <p class="break-words">{{$post->post}}</p>
+                            <p class="break-words">{!! nl2br(e($post->post)) !!}</p>
                         </td>
                     </tr>
                     <tr>

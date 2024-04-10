@@ -24,7 +24,7 @@
                     <div>
                         <a href="{{route('post.show', $post->id)}}" class="text-sm mb-1 line-clamp-2 sm:hidden no-underline hover:underline">{{$post->title}}</a>
                         <div class="sm:hidden flex overflow-hidden mb-2 text-xs sm:mb-4 sm:text-sm">
-                            <a href="" class="text-green-700">{{$post->category->name}}</a>
+                            <a href="{{route('home', ['category_id' => $post->category->id])}}" class="text-green-700">{{$post->category->name}}</a>
                             <div class="select-none">&nbsp•&nbsp</div>
                             <a href="{{ route('profile.show', $post->user->name) }}">{{$post->user->display_name}}</a>
                             <div class="select-none">&nbsp•&nbsp</div>
@@ -46,7 +46,7 @@
                             <div class="flex flex-1 flex-col justify-center">
                                 <a href="{{route('post.show', $post->id)}}" class="text-lg hidden sm:line-clamp-2 no-underline hover:underline mb-3">{{$post->title}}</a>
                                 <div class="hidden overflow-hidden whitespace-nowrap mb-4 sm:mb-4 sm:flex ">
-                                    <a href="" class="text-green-700">{{$post->category->name}}</a>
+                                    <a href="{{route('home', ['category_id' => $post->category->id])}}" class="text-green-700">{{$post->category->name}}</a>
                                     <div class="select-none">&nbsp•&nbsp</div>
                                     <a href="{{ route('profile.show', $post->user->name) }}">{{$post->user->display_name}}</a>
                                     <div class="select-none">&nbsp•&nbsp</div>

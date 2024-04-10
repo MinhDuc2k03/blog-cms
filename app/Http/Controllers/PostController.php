@@ -40,10 +40,8 @@ class PostController extends Controller
 
         $tagIDs = [];
         if($request->filled('tag')) {
-            $array = explode(',', $request->tag);
-            $array = array_map('trim', $array);
-            $array = array_unique($array);
-            
+            $array = array_unique(array_map('trim', explode(',', $request->tag)));
+
             foreach ($array as $key => $word) {
                 if (empty(strlen($array[$key]))) {
                     unset($array[$key]);
@@ -99,7 +97,8 @@ class PostController extends Controller
 
         $duplicate = 0;
         $newSlug = $slug;
-        while (Post::where('slug', $newSlug)->first() != null) {
+
+        while (Post::where('slug', $newSlug)->first() != null && !Post::where('slug', $newSlug)->first() == Post::where('id', $id)->first()) {
             $duplicate += 1;
             $newSlug = $slug .= '-' . $duplicate;
         }
@@ -111,13 +110,16 @@ class PostController extends Controller
 
             $thumbnailName = time() . '_' . Str::slug($request->title, '_') . '.' . $request->thumbnail->extension();
             $request->thumbnail->move(public_path('thumbnails'), $thumbnailName);
+
+            $data['thumbnail'] = $thumbnailName;
         }
 
         $tagIDs = [];
         if($request->filled('tag')) {
-            $array = explode(',', $request->tag);
-            $array = array_map('trim', $array);
-            $array = array_unique($array);
+            // $array = explode(',', $request->tag);
+            // $array = array_map('trim', $array);
+            // $array = array_unique($array);
+            $array = array_unique(array_map('trim', explode(',', $request->tag)));
             
             foreach ($array as $key => $word) {
                 if (empty(strlen($array[$key]))) {
@@ -143,7 +145,6 @@ class PostController extends Controller
         $request->validated();
         $data['title'] = $request->title;
         $data['description'] = $request->description;
-        $data['thumbnail'] = $thumbnailName;
         $data['post'] = $request->post;
         $data['category_id'] = Category::Where('name', $request->category)->first()->id;
         $data['slug'] = $slug;
@@ -160,13 +161,20 @@ class PostController extends Controller
 
     public function adminUpdatePost(PostFormRequest $request, string $id)
     {
+        $slug = Str::slug($request->title, '-');
+
+        $duplicate = 0;
+        $newSlug = $slug;
+
+        while (Post::where('slug', $newSlug)->first() != null && !Post::where('slug', $newSlug)->first() == Post::where('id', $id)->first()) {
+            $duplicate += 1;
+            $newSlug = $slug .= '-' . $duplicate;
+        }
+        $slug = $newSlug;
+
         $thumbnailName = '';
         if ($request->hasFile('thumbnail')) {
-            $oldThumbnail = Post::where('id', $id)->first()->thumbnail;
-            if ($oldThumbnail && file_exists('thumbnails/' .  $oldThumbnail))
-            {
-                unlink('thumbnails/' .  $oldThumbnail);
-            }
+            Storage::delete(Post::where('id', $id)->first()->thumbnail);
 
             $thumbnailName = time() . '_' . Str::slug($request->title, '_') . '.' . $request->thumbnail->extension();
             $request->thumbnail->move(public_path('thumbnails'), $thumbnailName);
@@ -174,13 +182,12 @@ class PostController extends Controller
             $data['thumbnail'] = $thumbnailName;
         }
 
-        $slug = Str::slug($request->title, '-');
-
         $tagIDs = [];
         if($request->filled('tag')) {
-            $array = explode(',', $request->tag);
-            $array = array_map('trim', $array);
-            $array = array_unique($array);
+            // $array = explode(',', $request->tag);
+            // $array = array_map('trim', $array);
+            // $array = array_unique($array);
+            $array = array_unique(array_map('trim', explode(',', $request->tag)));
             
             foreach ($array as $key => $word) {
                 if (empty(strlen($array[$key]))) {
@@ -204,17 +211,16 @@ class PostController extends Controller
 
 
         $request->validated();
-
-        $post = Post::find($id);
         $data['title'] = $request->title;
         $data['description'] = $request->description;
         $data['post'] = $request->post;
         $data['category_id'] = Category::Where('name', $request->category)->first()->id;
         $data['slug'] = $slug;
 
-        $post->update($data);
-        Post::where('id', $id)->first()->tags()->tags()->sync($tagIDs);
+        $post = Post::where('id', $id)->update($data);
+        Post::where('id', $id)->first()->tags()->sync($tagIDs);
 
+        
         $posts = Post::all();
         return redirect()->route('admin.post.showAll')->with(['posts' => $posts]);
     }

@@ -45,10 +45,10 @@
     </div>
     
     @if ($post->thumbnail != null)
-        <img src="{{ asset('thumbnails/' .  $post->thumbnail) }}" class="object-cover w-full mb-7">
+        <img src="{{ asset('thumbnails/' .  $post->thumbnail) }}" class="object-cover w-full mb-7 rounded-2xl">
     @endif
 
-    <div class="text-base font-normal leading-7 mb-12 break-words">{{$post->post}}</div>
+    <div class="text-base font-normal leading-7 mb-12 break-words">{!! nl2br(e($post->post)) !!}</div>
 
     {{-- <div class="flex flex-col sm:flex-row gap-5 mb-5">
         <img src="./images/images/news1-1.png" class="w-full sm:w-3/5 rounded-2xl">
@@ -91,7 +91,7 @@
         </ul>
     </div> --}}
 
-    <div class="flex gap-3 mb-10">
+    <div class="flex flex-wrap flex-row gap-3 mb-10">
         @if ($post->tags)
             @foreach ($post->tags as $tag)
                 <div>
