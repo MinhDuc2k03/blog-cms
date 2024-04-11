@@ -52,7 +52,13 @@
                                     <div class="select-none">&nbsp•&nbsp</div>
                                     <div class="opacity-50">{{$post->created_at->format('d/m/Y')}}</div>
                                 </div>
-                                <div class="leading-1 line-clamp-4 text-sm sm:line-clamp-3 sm:text-base sm:leading-7 opacity-50">{{$post->description}}</div>
+                                @if (strlen($post->description) != 0)
+                                    <div class="leading-1 line-clamp-4 mb-4 text-sm sm:line-clamp-3 sm:text-base sm:leading-7 opacity-50">{{$post->description}}</div>
+                                @endif
+                                <div class="flex gap-1">
+                                    <img src="{{ asset('assets/' . 'view.png') }}" class="h-5 opacity-50">
+                                    <div class="text-sm opacity-50">{{$post->views}}</div>
+                                </div>
                             </div>
                         </div>
                     </div>

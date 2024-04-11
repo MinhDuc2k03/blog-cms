@@ -15,8 +15,13 @@
             <a href="{{route('home', ['category_id' => $post->category->id])}}" class="rounded-full bg-green-700 transition duration-150 hover:bg-green-900 text-gray-100 px-9 py-2">{{$post->category->name}}</a>
         </div>
     </div>
-
-    <div class="text-xl leading-7 sm:text-3xl sm:leading-10 font-bold mb-3">{{$post->title}}</div>
+    <div class="flex justify-between mb-3">
+        <div class="text-xl leading-7 sm:text-3xl sm:leading-10 font-bold">{{$post->title}}</div>
+        <div class="flex gap-1">
+            <img src="{{ asset('assets/' . 'view.png') }}" class="h-7">
+            <div class="text-xl">{{$post->views}}</div>
+        </div>
+    </div>
 
     <div class="block sm:flex justify-between mb-10 gap-2">
         <div class="flex justify-normal sm:justify-center items-center mb-3 sm:mb-0">
@@ -152,7 +157,13 @@
                                 <div class="select-none">&nbsp•&nbsp</div>
                                 <div class="opacity-50">{{$categoryPost->created_at->format('d/m/Y')}}</div>
                             </div>
-                            <div class="leading-1 line-clamp-4 text-sm sm:line-clamp-3 sm:text-base sm:leading-7 opacity-50">{{$categoryPost->description}}</div>
+                            @if (strlen($categoryPost->description) != 0)
+                                <div class="leading-1 line-clamp-4 mb-4 text-sm sm:line-clamp-3 sm:text-base sm:leading-7 opacity-50">{{$categoryPost->description}}</div>
+                            @endif
+                            <div class="flex gap-1">
+                                <img src="{{ asset('assets/' . 'view.png') }}" class="h-5 opacity-50">
+                                <div class="text-sm opacity-50">{{$categoryPost->views}}</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -207,7 +218,13 @@
                                 <div class="select-none">&nbsp•&nbsp</div>
                                 <div class="opacity-50">{{$hotPost->created_at->format('d/m/Y')}}</div>
                             </div>
-                            <div class="leading-1 line-clamp-4 text-sm sm:line-clamp-3 sm:text-base sm:leading-7 opacity-50">{{$hotPost->description}}</div>
+                            @if (strlen($hotPost->description) != 0)
+                                <div class="leading-1 line-clamp-4 mb-4 text-sm sm:line-clamp-3 sm:text-base sm:leading-7 opacity-50">{{$hotPost->description}}</div>
+                            @endif
+                            <div class="flex gap-1">
+                                <img src="{{ asset('assets/' . 'view.png') }}" class="h-5 opacity-50">
+                                <div class="text-sm opacity-50">{{$hotPost->views}}</div>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -16,9 +16,9 @@ use App\Http\Requests\PostFormRequest;
 class UserPostController extends Controller
 {
     public function home(Request $request) {
-        if (User::where('name', 'admin')->count() == 0) {
-            User::factory()->count(1)->create();
-        }
+        // if (User::where('name', 'admin')->count() == 0) {
+        //     User::factory()->count(1)->create();
+        // }
 
         if ($request->filled('category_id')) {
             $posts = Post::where('category_id', $request->category_id)->get();
