@@ -17,6 +17,8 @@ Step 4: Chạy `php artisan key:generate`
 
 Step 5: Đổi tên trong file .env và chạy `php artisan migrate` để tạo database
 
+Step 6: Chạy `php artisan db:seed --class=AdminSeeder`
+
 Step 6: Bắt đầu server bằng `php artisan serve` và `npm run dev`
 
 

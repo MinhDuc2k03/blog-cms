@@ -33,7 +33,11 @@ class AdminPostController extends Controller
         }
 
         if ($request->option == 'name') {
-            $posts = User::find(User::where('name', $request->search)->first()->id)->posts;
+            if (User::where('name', $request->search)->first()) {
+                $posts = User::find(User::where('name', $request->search)->first()->id)->posts;
+            } else {
+                dd(User::where('name', $request->search)->first());
+            }
         }
 
         if ($request->option == 'name_id') {

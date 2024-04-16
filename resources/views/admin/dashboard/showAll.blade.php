@@ -10,19 +10,19 @@
         <div class="flex mt-12 relative w-full items-baseline">
             <a href="{{ route('admin.user.showAll') }}" class="w-1/4 mr-2 bg-slate-100 transition duration-150 hover:bg-slate-200 border-2 border-slate-400 rounded-sm pb-8 px-1 pt-1">
                 <div class="text-sm pb-0.5 pl-0.5 tracking-tighter">Registered Users.</div>
-                <div class="text-xl pl-1">{{$users->count()}}</div>
+                <div class="text-xl pl-1">{{$users}}</div>
             </a>
             <a href="{{ route('admin.post.showAll') }}" class="w-1/4 mx-2 bg-slate-100 transition duration-150 hover:bg-slate-200 border-2 border-slate-400 rounded-sm pb-8 px-1 pt-1">
                 <div class="text-sm pb-0.5 pl-0.5 tracking-tighter">Posts.</div>
-                <div class="text-xl pl-1">{{$posts->count()}}</div>
+                <div class="text-xl pl-1">{{$posts}}</div>
             </a>
             <a href="{{ route('admin.category.showAll') }}" class="w-1/4 mx-2 bg-slate-100 transition duration-150 hover:bg-slate-200 border-2 border-slate-400 rounded-sm pb-8 px-1 pt-1">
                 <div class="text-sm pb-0.5 pl-0.5 tracking-tighter">Categories.</div>
-                <div class="text-xl pl-1">{{$categories->count()}}</div>
+                <div class="text-xl pl-1">{{$categories}}</div>
             </a>
             <a href="{{ route('admin.tag.showAll') }}" class="w-1/4 ml-2 bg-slate-100 transition duration-150 hover:bg-slate-200 border-2 border-slate-400 rounded-sm pb-8 px-1 pt-1">
                 <div class="text-sm pb-0.5 pl-0.5 tracking-tighter">Tags.</div>
-                <div class="text-xl pl-1">{{$tags->count()}}</div>
+                <div class="text-xl pl-1">{{$tags}}</div>
             </a>
         </div>
         <div class="relative overflow-x-auto">

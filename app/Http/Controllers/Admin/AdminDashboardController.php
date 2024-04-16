@@ -15,10 +15,10 @@ use Illuminate\Support\Facades\Auth;
 class AdminDashboardController extends Controller
 {
     public function dashboardShowAll() {
-        $posts = Post::all();
-        $categories = Category::all();
-        $users = User::all();
-        $tags = Tag::all();
+        $posts = Post::count();
+        $categories = Category::count();
+        $users = User::count();
+        $tags = Tag::count();
 
         if (Auth::check()) {
             return view('admin.dashboard.showAll')->with(['posts' => $posts, 'categories' => $categories, 'users' => $users, 'tags' => $tags]);

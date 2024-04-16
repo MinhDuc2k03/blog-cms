@@ -25,7 +25,7 @@ class UserPostController extends Controller
         } elseif ($request->filled('author_id')) {
             $posts = Post::where('author_id', $request->author_id)->get();
         } else {
-            $posts = Post::all();
+            $posts = Post::all()->sortByDesc('created_at');
         }
         
         return view('welcome', compact('posts'));
@@ -38,8 +38,7 @@ class UserPostController extends Controller
         $key = 'blog_' . $post->id;
         if (!session()->has($key)) {
             $post->increment('views');
-
-            session([$key => 1]);
+            session()->put($key, 1);
         }
 
         $categoryPosts = Post::where('category_id', $post->category->id)->get();
@@ -55,9 +54,9 @@ class UserPostController extends Controller
     public function createPost() {
         if(!session()->has('url.intended') && url()->previous() != route('logout'))
         {
-            session(['url.intended' => url()->previous()]);
+            session()->put('url.intended', url()->previous());
         } else {
-            session(['url.intended' => route('home')]);
+            session()->put('url.intended', route('home'));
         }
 
         if (Auth::check()) {
@@ -69,7 +68,7 @@ class UserPostController extends Controller
     {
         if(!session()->has('url.intended') && url()->previous() == route('logout'))
         {
-            session(['url.intended' => url()->previous()]);
+            session()->put('url.intended', url()->previous());
         }
 
         $post = Post::find($id);

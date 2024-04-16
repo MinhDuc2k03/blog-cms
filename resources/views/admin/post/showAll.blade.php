@@ -25,6 +25,18 @@
         @endauth
     </div> --}}
 
+    @if (session('message'))
+        <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-3 py-3 shadow-md" role="alert" id="notif">
+            <div class="flex">
+                <div class="py-1"><svg class="fill-current h-6 w-6 text-teal-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></div>
+                <div>
+                    <p class="font-bold">{{session('message')}}</p>
+                    <p class="text-sm"></p>
+                </div>
+            </div>
+        </div>    
+    @endif
+
     <div class="sm:mx-auto sm:w-4/5 flex mt-12 gap-1.5 items-baseline w-4/5 justify-between">
         <div class="flex flex-row items-baseline">
             <a href="{{route('admin.post.create')}}" class="rounded-md bg-indigo-600 px-3 py-1 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Create Post</a>
@@ -109,5 +121,10 @@
     <div class="relative overflow-x-auto">
         
     </div>
+    <script type="text/javascript">
+        document.querySelector("#notif").addEventListener('mouseover', () => {
+            document.querySelector('#notif').classList.add('hidden')
+        });
+    </script>
 </div>
 @endsection
