@@ -4,7 +4,20 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
-        @vite('resources/css/app.css')
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        fontFamily: {
+                            default:['Montserrat', 'sans-serif'],
+                            display: ['Montserrat', 'sans-serif'],
+                            body: ['Montserrat', 'sans-serif'],
+                        },
+                    },
+                },
+            }
+        </script>
         <title>@yield('title', 'unknown')</title>
     </head>
     <body class=" font-default font-semibold text-gray-800">
