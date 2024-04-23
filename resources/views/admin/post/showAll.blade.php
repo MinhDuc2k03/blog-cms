@@ -90,7 +90,7 @@
                             @if ($post->thumbnail == '')
                                 <div class="select-none">-</div>
                             @else
-                                <img src="{{ asset('thumbnails/' .  $post->thumbnail) }}" width= "100" height="100" alt="">
+                                <img src="{{ asset('storage/thumbnails/' .  $post->thumbnail) }}" width= "100" height="100" alt="">
                             @endif
                         </td>
                         <td class="px-3 py-3 border border-black">

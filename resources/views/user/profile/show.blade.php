@@ -47,7 +47,7 @@
                 <div class="relative max-w-full">
                     <a href="{{route('post.show', $post->id)}}">
                         @if ($post->thumbnail != null)
-                            <img src="{{ asset('thumbnails/' .  $post->thumbnail) }}" class="object-cover rounded-2xl w-36 h-24">
+                            <img src="{{ asset('storage/thumbnails/' .  $post->thumbnail) }}" class="object-cover rounded-2xl w-36 h-24">
                         @else
                             <img src="{{ asset('assets/' . 'blank.png') }}" class="object-cover rounded-2xl w-36 h-24">
                         @endif

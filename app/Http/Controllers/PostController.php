@@ -35,7 +35,8 @@ class PostController extends Controller
         $thumbnailName = '';
         if ($request->hasFile('thumbnail')) {
             $thumbnailName = time() . '_' . Str::slug($request->title, '_') . '.' . $request->thumbnail->extension();
-            $request->thumbnail->move(public_path('thumbnails'), $thumbnailName);
+
+            $request->thumbnail->move(storage_path('app/public/thumbnails/'), $thumbnailName);
         }
 
         $tagIDs = [];
@@ -106,10 +107,10 @@ class PostController extends Controller
 
         $thumbnailName = '';
         if ($request->hasFile('thumbnail')) {
-            unlink(public_path('thumbnails/' . Post::find($id)->thumbnail));
+            unlink(storage_path('app/public/thumbnails/' . Post::find($id)->thumbnail));
 
             $thumbnailName = time() . '_' . Str::slug($request->title, '_') . '.' . $request->thumbnail->extension();
-            $request->thumbnail->move(public_path('thumbnails'), $thumbnailName);
+            $request->thumbnail->move(storage_path('app/public/thumbnails/'), $thumbnailName);
 
             $data['thumbnail'] = $thumbnailName;
         }
@@ -174,10 +175,10 @@ class PostController extends Controller
 
         $thumbnailName = '';
         if ($request->hasFile('thumbnail')) {
-            unlink(public_path('thumbnails/' . Post::find($id)->thumbnail));
+            unlink(storage_path('app/public/thumbnails/' . Post::find($id)->thumbnail));
 
             $thumbnailName = time() . '_' . Str::slug($request->title, '_') . '.' . $request->thumbnail->extension();
-            $request->thumbnail->move(public_path('thumbnails'), $thumbnailName);
+            $request->thumbnail->move(storage_path('app/public/thumbnails/'), $thumbnailName);
 
             $data['thumbnail'] = $thumbnailName;
         }
@@ -228,7 +229,7 @@ class PostController extends Controller
     public function destroyPost(string $id)
     {
         if (Post::find($id)->thumbnail) {
-            unlink(public_path('thumbnails/' . Post::find($id)->thumbnail));
+            unlink(storage_path('app/public/thumbnails/' . Post::find($id)->thumbnail));
         }
         Post::find($id)->tags()->detach();
         Post::find($id)->delete();

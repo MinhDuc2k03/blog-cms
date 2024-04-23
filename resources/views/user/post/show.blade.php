@@ -50,7 +50,7 @@
     </div>
     
     @if ($post->thumbnail != null)
-        <img src="{{ asset('thumbnails/' .  $post->thumbnail) }}" class="object-cover w-full mb-7 rounded-2xl">
+        <img src="{{ asset('storage/thumbnails/' .  $post->thumbnail) }}" class="object-cover w-full mb-7 rounded-2xl">
     @endif
 
     <div class="text-base font-normal leading-7 mb-12 break-words">{!! nl2br(e($post->post)) !!}</div>
@@ -139,7 +139,7 @@
                         <div class="relative max-w-full">
                             <a href="{{route('post.show', $categoryPost->id)}}">
                                 @if ($categoryPost->thumbnail != null)
-                                    <img src="{{ asset('thumbnails/' .  $categoryPost->thumbnail) }}" class="object-cover rounded-2xl w-36 h-24 sm:w-80 sm:h-52">
+                                    <img src="{{ asset('storage/thumbnails/' .  $categoryPost->thumbnail) }}" class="object-cover rounded-2xl w-36 h-24 sm:w-80 sm:h-52">
                                 @else
                                     <img src="{{ asset('assets/' . 'blank.png') }}" class="object-cover rounded-2xl w-36 h-24 sm:w-80 sm:h-52">
                                 @endif
@@ -200,7 +200,7 @@
                         <div class="relative max-w-full">
                             <a href="{{route('post.show', $hotPost->id)}}">
                                 @if ($hotPost->thumbnail != null)
-                                    <img src="{{ asset('thumbnails/' .  $hotPost->thumbnail) }}" class="object-cover rounded-2xl w-36 h-24 sm:w-80 sm:h-52">
+                                    <img src="{{ asset('storage/thumbnails/' .  $hotPost->thumbnail) }}" class="object-cover rounded-2xl w-36 h-24 sm:w-80 sm:h-52">
                                 @else
                                     <img src="{{ asset('assets/' . 'blank.png') }}" class="object-cover rounded-2xl w-36 h-24 sm:w-80 sm:h-52">
                                 @endif
