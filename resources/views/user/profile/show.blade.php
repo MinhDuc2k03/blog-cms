@@ -9,7 +9,7 @@
                 @if ($user->profile_picture == null)
                     <img class="object-cover w-24 h-24 rounded-full" src="{{ asset('assets/' .  'DefaultProfilePicture.jpg') }}">
                 @else
-                    <img class="object-cover w-24 h-24 rounded-full" src="{{ asset('profiles/' .  $user->profile_picture) }}">
+                    <img class="object-cover w-24 h-24 rounded-full" src="{{ asset('storage/profiles/' .  auth()->user()->profile_picture) }}">
                 @endif
             </a>
             

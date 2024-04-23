@@ -39,7 +39,7 @@ class UserController extends Controller
             }
 
             $pfpName = time() . '_' . Str::slug($request->name, '_') . '.' . $request->profile_picture->extension();
-            $request->profile_picture->move(public_path('profiles'), $pfpName);
+            $request->profile_picture->move(storage_path('app/public/profiles/'), $pfpName);
         }
 
 

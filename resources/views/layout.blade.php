@@ -82,7 +82,7 @@
                             @if (auth()->user()->profile_picture == null)
                                 <img class="mr-6 md:mr-12 w-10 h-10 rounded-full object-cover" src="{{ asset('assets/' .  'DefaultProfilePicture.jpg') }}">
                             @else
-                                <img class="mr-6 md:mr-12 w-10 h-10 rounded-full object-cover" src="{{ asset('profiles/' .  auth()->user()->profile_picture) }}">
+                                <img class="mr-6 md:mr-12 w-10 h-10 rounded-full object-cover" src="{{ asset('storage/profiles/' .  auth()->user()->profile_picture) }}">
                             @endif
                         </button>
                         <div id="user-dropdown" class="hidden">
