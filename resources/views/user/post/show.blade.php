@@ -115,7 +115,7 @@
         </div>
         <div class="flex justify-between items-center">
             <a href="{{route('home', ['category_id' => $post->category->id])}}">
-                <img src="./images/icons/arrowRight.png" class="sm:hidden h-4">
+                <img src="{{ asset('assets/' . 'arrowRight.png') }}" class="sm:hidden h-4">
                 <div class="text-base font-normal transition duration-150 hover:font-bold hidden sm:block">See more</div>
             </a>
         </div>
@@ -177,7 +177,7 @@
         <div class="text-sm sm:text-lg">Hot blogs</div>
         <div class="flex justify-between items-center">
             <a href="{{route('home')}}">
-                <img src="./images/icons/arrowRight.png" class="sm:hidden h-4">
+                <img src="{{ asset('assets/' . 'arrowRight.png') }}" class="sm:hidden h-4">
                 <div class="text-base font-normal transition duration-150 hover:font-bold hidden sm:block">See more</div>
             </a>
         </div>

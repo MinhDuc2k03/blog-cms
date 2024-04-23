@@ -149,7 +149,7 @@
             </div>
         </div>
         <script type="text/javascript">
-            document.querySelector("#button-menu-open").onclick= function() {
+            document.querySelector("#button-menu-open").onclick = function() {
                 if(document.querySelector('#modal').classList.contains('hidden')) {
                     document.querySelector('#modal').classList.add('flex')
                     document.querySelector('#modal').classList.remove('hidden')
@@ -159,7 +159,7 @@
                 }
             }
 
-            document.querySelector("#button-menu-close").onclick= function() {
+            document.querySelector("#button-menu-close").onclick = function() {
                 if(document.querySelector('#modal').classList.contains('hidden')){
                     document.querySelector('#modal').classList.add('flex')
                     document.querySelector('#modal').classList.remove('hidden')
@@ -169,15 +169,17 @@
                 }
             }
 
-            document.querySelector("#button-user-open").onclick= function() {
-                if(document.querySelector('#user-dropdown').classList.contains('hidden')){
-                    document.querySelector('#user-dropdown').classList.add('flex')
-                    document.querySelector('#user-dropdown').classList.remove('hidden')
-                } else {
-                    document.querySelector('#user-dropdown').classList.add('hidden')
-                    document.querySelector('#user-dropdown').classList.remove('flex')
+            if(document.querySelector("#button-user-open") != null) {
+                document.querySelector("#button-user-open").onclick = function() {
+                    if(document.querySelector('#user-dropdown').classList.contains('hidden')){
+                        document.querySelector('#user-dropdown').classList.add('flex')
+                        document.querySelector('#user-dropdown').classList.remove('hidden')
+                    } else {
+                        document.querySelector('#user-dropdown').classList.add('hidden')
+                        document.querySelector('#user-dropdown').classList.remove('flex')
+                    }
                 }
-            }
+            }   
         </script>
     </body>
 </html>
