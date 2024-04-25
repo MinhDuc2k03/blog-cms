@@ -23,6 +23,17 @@
                         <td class="font-semibold px-4 py-3 w-24 bg-slate-200">Display name:</td>
                         <td class="px-4 py-3">{{$user->display_name}}</td>
                     </tr>
+
+                    <tr>
+                        <td class="font-semibold px-4 py-3 w-24 bg-slate-200">Profile picture:</td>
+                        <td class="px-4 py-3">
+                            @if ($user->profile_picture == null)
+                                <img class="w-10 h-10 rounded-full items-center bg-white" src="{{ asset('assets/' .  'DefaultProfilePicture.jpg') }}">
+                            @else
+                                <img class="w-10 h-10 rounded-full items-center bg-white" src="{{ asset('storage/profiles/' .  $user->profile_picture) }}">
+                            @endif
+                        </td>
+                    </tr>
                     <tr>
                         <td class="font-semibold px-4 py-3 w-24 bg-slate-200">Email:</td>
                         <td class="px-4 py-3">{{$user->email}}</td>
@@ -62,5 +73,6 @@
                 </tbody>
             </table>
         </div>
+        <div class="py-14"></div>
     </div>
 @endsection

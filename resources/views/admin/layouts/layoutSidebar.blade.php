@@ -61,7 +61,7 @@
                         @if (auth()->user()->profile_picture == null)
                             <img class="w-10 h-10 rounded-full items-center bg-white my-auto ml-5" src="{{ asset('assets/' .  'DefaultProfilePicture.jpg') }}">
                         @else
-                            <img class="w-10 h-10 rounded-full items-center bg-white my-auto ml-5" src="{{ asset('profiles/' .  auth()->user()->profile_picture) }}">
+                            <img class="w-10 h-10 rounded-full items-center bg-white my-auto ml-5" src="{{ asset('storage/profiles/' .  auth()->user()->profile_picture) }}">
                         @endif
                         <div class="my-auto">
                             <div>{{auth()->user()->name}}</div>
