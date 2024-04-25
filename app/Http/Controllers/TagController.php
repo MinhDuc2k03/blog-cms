@@ -24,6 +24,7 @@ class TagController extends Controller
 
         $data['name'] = $request->name;
         $data['slug'] = $slug;
+        $data['author_id'] = Auth::id();
 
         $tag = Tag::create($data);
 

@@ -10,11 +10,12 @@ class Tag extends Model
 {
     use HasFactory;
     protected $table = 'tags';
+    protected $guarded = [];
 
-    protected $fillable = [
-        'name',
-        'slug',
-    ];
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'author_id');
+    }
 
     public function posts()
     {

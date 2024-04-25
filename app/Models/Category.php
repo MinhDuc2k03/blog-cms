@@ -9,13 +9,13 @@ use App\Models\Post;
 class Category extends Model
 {
     use HasFactory;
-
     protected $table = 'categories';
+    protected $guarded = [];
 
-    protected $fillable = [
-        'name',
-        'slug',
-    ];
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'author_id');
+    }
 
     public function posts()
     {

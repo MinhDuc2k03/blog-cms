@@ -28,6 +28,10 @@
                         <td class="px-4 py-3">{{$category->slug}}</td>
                     </tr>
                     <tr>
+                        <td class="font-semibold px-4 py-3 w-24 bg-slate-200">Created by:</td>
+                        <td class="px-4 py-3">{{$category->user->name}}</td>
+                    </tr>
+                    <tr>
                         <td class="font-semibold px-4 py-3 w-24 bg-slate-200">Created at:</td>
                         <td class="px-4 py-3">{{$category->created_at}}</td>
                     </tr>

@@ -28,7 +28,7 @@
                         <td class="font-semibold px-4 py-3 w-24 bg-slate-200">Profile picture:</td>
                         <td class="px-4 py-3">
                             @if ($user->profile_picture == null)
-                                <img class="w-10 h-10 rounded-full items-center bg-white" src="{{ asset('assets/' .  'DefaultProfilePicture.jpg') }}">
+                                -
                             @else
                                 <img class="w-10 h-10 rounded-full items-center bg-white" src="{{ asset('storage/profiles/' .  $user->profile_picture) }}">
                             @endif

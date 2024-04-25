@@ -25,6 +25,7 @@ class CategoryController extends Controller
 
         $data['name'] = $request->name;
         $data['slug'] = $slug;
+        $data['author_id'] = Auth::id();
 
         $category = Category::create($data);
 

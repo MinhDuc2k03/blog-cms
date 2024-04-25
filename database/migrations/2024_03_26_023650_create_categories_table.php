@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name', 255)->unique();  
             $table->string('slug', 255)->unique();
+            $table->bigInteger('author_id')->foreign('author_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

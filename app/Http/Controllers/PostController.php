@@ -53,6 +53,7 @@ class PostController extends Controller
                     $tag = Tag::create([
                         'name' => $array[$key],
                         'slug' => Str::slug($array[$key], '-'),
+                        'author_id' => Auth::id(),
                     ]);
                     array_push($tagIDs, $tag->id);
                 } else {
@@ -67,6 +68,7 @@ class PostController extends Controller
             $category = Category::create([
                 'name' => $request->category,
                 'slug' => Str::slug($request->category, '_'),
+                'author_id' => Auth::id(),
             ]);
             $data['category_id'] = $category->id;
         } else {
