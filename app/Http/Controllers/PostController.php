@@ -109,10 +109,12 @@ class PostController extends Controller
 
         $thumbnailName = '';
         if ($request->hasFile('thumbnail')) {
-            unlink(storage_path('app/public/thumbnails/' . Post::find($id)->thumbnail));
+            if (is_file(public_path('thumbnails/' . Post::find($id)->thumbnail))) {
+                unlink(public_path('thumbnails/' . Post::find($id)->thumbnail));
+            }
 
             $thumbnailName = time() . '_' . Str::slug($request->title, '_') . '.' . $request->thumbnail->extension();
-            $request->thumbnail->move(storage_path('app/public/thumbnails/'), $thumbnailName);
+            $request->thumbnail->move(public_path('thumbnails'), $thumbnailName);
 
             $data['thumbnail'] = $thumbnailName;
         }
@@ -155,7 +157,6 @@ class PostController extends Controller
         $post = Post::where('id', $id)->update($data);
         Post::where('id', $id)->first()->tags()->sync($tagIDs);
 
-        
         $posts = Post::all();
         return redirect()->route('home')->with(['posts' => $posts]);
     }
@@ -177,10 +178,12 @@ class PostController extends Controller
 
         $thumbnailName = '';
         if ($request->hasFile('thumbnail')) {
-            unlink(storage_path('app/public/thumbnails/' . Post::find($id)->thumbnail));
+            if (is_file(public_path('thumbnails/' . Post::find($id)->thumbnail))) {
+                unlink(public_path('thumbnails/' . Post::find($id)->thumbnail));
+            }
 
             $thumbnailName = time() . '_' . Str::slug($request->title, '_') . '.' . $request->thumbnail->extension();
-            $request->thumbnail->move(storage_path('app/public/thumbnails/'), $thumbnailName);
+            $request->thumbnail->move(public_path('thumbnails'), $thumbnailName);
 
             $data['thumbnail'] = $thumbnailName;
         }

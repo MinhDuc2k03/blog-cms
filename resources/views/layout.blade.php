@@ -21,7 +21,7 @@
         <title>@yield('title', 'unknown')</title>
     </head>
     <body class=" font-default font-semibold text-gray-800">
-        <header class="shadow-md h-20 bg-white backdrop-blur-xl transition duration-150 hover:bg-white md:bg-[#ffffffb3] flex justify-between items-center fixed inset-x-0 top-0 z-20">
+        <header class="shadow-md h-20 bg-white backdrop-blur-xl transition duration-150 hover:bg-white md:bg-[#ffffffb3] flex  items-center fixed inset-x-0 top-0 z-20">
             <div class="flex lg:hidden ">
                 <div class="ml-6">
                     <button id="button-menu-open">
@@ -35,8 +35,8 @@
                 </div>
             </div>
 
-            <div class="text-sm hidden lg:flex">
-                <div class="mr-10 ml-10">
+            <div class="text-sm hidden lg:flex absolute left-0">
+                {{-- <div class="mr-10 ml-10">
                     <a href="" class="opacity-50 transition duration-150 hover:opacity-100 line-clamp-1">Mua nhà</a>
                 </div>
                 <div class="mr-10">
@@ -44,17 +44,17 @@
                 </div>
                 <div class="mr-10">
                     <a href="" class="opacity-50 transition duration-150 hover:opacity-100 line-clamp-1">Khám phá</a>
-                </div>
-                <div class="mr-10">
+                </div> --}}
+                <div class="mr-10 ml-10">
                     <a href="" class="pb-1 border-b-2 border-red-600 line-clamp-1">Blog</a>
                 </div>
             </div>
 
-            <a href="{{route('home')}}" class="hidden lg:block">
+            <a href="{{route('home')}}" class="hidden lg:block mx-auto">
                 <img src="{{ asset('assets/' . 'logo.png') }}" class="w-32">
             </a>
 
-            <div class="flex ml-14">
+            <div class="flex ml-14 absolute right-0">
                 @if (auth()->user() != null)
                     <div class="flex items-center">
                         <button class="lg:hidden">
