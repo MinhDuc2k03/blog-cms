@@ -17,9 +17,11 @@ Step 4: Chạy `php artisan key:generate`
 
 Step 5: Đổi tên trong file .env và chạy `php artisan migrate` để tạo database
 
-Step 6: Chạy `php artisan db:seed --class=AdminSeeder`
+Step 6: Chạy `php artisan storage:link`
 
-Step 6: Bắt đầu server bằng `php artisan serve` ~~và `npm run dev`~~
+Step 7: Chạy `php artisan db:seed --class=AdminSeeder`
+
+Step 8: Bắt đầu server bằng `php artisan serve` ~~và `npm run dev`~~
 
 
 ### Đăng nhập vào tk admin
@@ -34,3 +36,5 @@ Password: 12345
  - /admin/cagetory: Trang admin cho các mục
  - /admin/tag: Trang admin cho các tag
  - /admin/user: Trang admin cho các người dùng
+
+ - /filament_admin: Trang admin cho dashboard làm bằng filament
