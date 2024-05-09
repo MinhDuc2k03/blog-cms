@@ -11,11 +11,9 @@ class AdminAuthenticate
 {
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check() && Auth::user()->role != 0) {
-            return $next($request);
-        }
-        if (!Auth::check()) {
+        if (Auth::check() && Auth::user()->role == 0) {
             return redirect()->route('home');
         }
+        return $next($request);
     }
 }
