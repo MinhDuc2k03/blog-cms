@@ -109,12 +109,12 @@ class PostController extends Controller
 
         $thumbnailName = '';
         if ($request->hasFile('thumbnail')) {
-            if (is_file(public_path('thumbnails/' . Post::find($id)->thumbnail))) {
-                unlink(public_path('thumbnails/' . Post::find($id)->thumbnail));
+            if (is_file(storage_path('app/public/thumbnails/' . Post::find($id)->thumbnail))) {
+                unlink(storage_path('app/public/thumbnails/' . Post::find($id)->thumbnail));
             }
 
             $thumbnailName = time() . '_' . Str::slug($request->title, '_') . '.' . $request->thumbnail->extension();
-            $request->thumbnail->move(public_path('thumbnails'), $thumbnailName);
+            $request->thumbnail->move(storage_path('app/public/thumbnails/'), $thumbnailName);
 
             $data['thumbnail'] = $thumbnailName;
         }
@@ -136,6 +136,7 @@ class PostController extends Controller
                     $tag = Tag::create([
                         'name' => $array[$key],
                         'slug' => Str::slug($array[$key], '-'),
+                        'author_id' => Auth::id(),
                     ]);
                     array_push($tagIDs, $tag->id);
                 } else {
@@ -178,12 +179,12 @@ class PostController extends Controller
 
         $thumbnailName = '';
         if ($request->hasFile('thumbnail')) {
-            if (is_file(public_path('thumbnails/' . Post::find($id)->thumbnail))) {
-                unlink(public_path('thumbnails/' . Post::find($id)->thumbnail));
+            if (is_file(storage_path('app/public/thumbnails/' . Post::find($id)->thumbnail))) {
+                unlink(storage_path('app/public/thumbnails/' . Post::find($id)->thumbnail));
             }
 
             $thumbnailName = time() . '_' . Str::slug($request->title, '_') . '.' . $request->thumbnail->extension();
-            $request->thumbnail->move(public_path('thumbnails'), $thumbnailName);
+            $request->thumbnail->move(storage_path('app/public/thumbnails/'), $thumbnailName);
 
             $data['thumbnail'] = $thumbnailName;
         }
@@ -205,6 +206,7 @@ class PostController extends Controller
                     $tag = Tag::create([
                         'name' => $array[$key],
                         'slug' => Str::slug($array[$key], '-'),
+                        'author_id' => Auth::id(),
                     ]);
                     array_push($tagIDs, $tag->id);
                 } else {
