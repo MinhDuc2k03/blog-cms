@@ -41,8 +41,8 @@ class UserResource extends Resource
                 ->afterStateUpdated(function(string $operation, string $state, Forms\Set $set) {
                     $set('name', Str::slug($state, '_'));
                 })->required(),
-                TextInput::make('name')->label('Username')->maxLength(21)->readOnly(),
-                TextInput::make('email')->required(),
+                TextInput::make('name')->label('Username')->maxLength(21)->unique(),
+                TextInput::make('email')->required()->regex('/^.+@.+$/i'),
                 TextInput::make('password')
                     ->password()
                     ->dehydrateStateUsing(fn ($state) => Hash::make($state))
