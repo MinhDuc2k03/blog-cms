@@ -23,5 +23,12 @@
     </head>
     <body class="bg-blue-100 font-semibold text-gray-800">
         @yield('content')
+        <script>
+            ClassicEditor
+                .create( document.querySelector( '#editor' ) )
+                .catch( error => {
+                    console.error( error );
+                } );
+        </script>
     </body>
 </html>
