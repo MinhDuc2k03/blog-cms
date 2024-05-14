@@ -22,9 +22,12 @@ class CreatePost extends CreateRecord
             $newSlug = $data['slug'] .= '-' . $duplicate;
         }
         $data['slug'] = $newSlug;
-
-        $newName = explode('/', $data['thumbnail']);
-        $data['thumbnail'] = $newName[1];
+        
+        if ($data['thumbnail'] != null) {
+            $newName = explode('/', $data['thumbnail']);
+            $data['thumbnail'] = $newName[1];
+        }
+        
         return $data;
     }
 }

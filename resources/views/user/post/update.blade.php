@@ -82,7 +82,7 @@
                     <div class="text-red-500 select-none ml-1">*</div>
                 </div>
                 <div class="mt-2">
-                    <textarea rows="10" name="post" class="pl-2 pt-1 rounded-md w-full ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">{{$post->post}}</textarea>
+                    <textarea id="editor" rows="10" name="post" class=" pl-2 pt-1 rounded-md w-full ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">{{$post->post}}</textarea>
                 </div>
             </div>
 
@@ -99,4 +99,14 @@
         </form>
     </div>
 </div>
+<script>
+    ClassicEditor
+            .create( document.querySelector( '#editor' ) )
+            .then( editor => {
+                    console.log( editor );
+            } )
+            .catch( error => {
+                    console.error( error );
+            } );
+</script>
 @endsection

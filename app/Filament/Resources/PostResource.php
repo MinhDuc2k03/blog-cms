@@ -18,7 +18,7 @@ use Filament\Tables\Columns\TagsColumn;
 
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\MarkdownEditor;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\Select;
 
@@ -47,7 +47,14 @@ class PostResource extends Resource
                 FileUpload::make('thumbnail')->directory('thumbnails'),
                 Select::make('category_id')->label('Category')->relationship('category', 'name')->required(),
                 Select::make('tag_id')->label('Tags')->multiple()->relationship('tags', 'name'),
-                TextInput::make('post')->required(),
+                RichEditor::make('post')->required()
+                ->disableToolbarButtons([
+                    'attachFiles',
+                    'blockquote',
+                    'codeBlock',
+                    'h2',
+                    'h3',
+                ]),
             ])
         ]);
     }

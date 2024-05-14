@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
         <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://cdn.ckeditor.com/ckeditor5/41.3.1/classic/ckeditor.js"></script>
         <script>
             tailwind.config = {
                 theme: {
@@ -20,7 +21,7 @@
         </script>
         <title>@yield('title', 'unknown')</title>
     </head>
-    <body class=" font-default font-semibold text-gray-800">
+    <body class="font-body font-semibold text-gray-800">
         <header class="shadow-md h-20 bg-white backdrop-blur-xl transition duration-150 hover:bg-white md:bg-[#ffffffb3] flex  items-center fixed inset-x-0 top-0 z-20">
             <div class="flex lg:hidden ">
                 <div class="ml-6">

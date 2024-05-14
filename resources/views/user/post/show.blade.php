@@ -53,7 +53,7 @@
         <img src="{{ asset('storage/thumbnails/' .  $post->thumbnail) }}" class="object-cover w-full mb-7 rounded-2xl">
     @endif
 
-    <div class="text-base font-normal leading-7 mb-12 break-words">{!! nl2br(e($post->post)) !!}</div>
+    <div class="text-base font-normal leading-7 mb-12 break-words">{!! $post->post !!}</div>
 
     {{-- <div class="flex flex-col sm:flex-row gap-5 mb-5">
         <img src="./images/images/news1-1.png" class="w-full sm:w-3/5 rounded-2xl">

@@ -63,7 +63,7 @@
                     <tr>
                         <td class="font-semibold px-4 py-3 w-24 bg-slate-200">Content:</td>
                         <td class="px-4 py-3">
-                            <p class="break-words">{!! nl2br(e($post->post)) !!}</p>
+                            <p class="break-words">{!! $post->post !!}</p>
                         </td>
                     </tr>
                     <tr>
