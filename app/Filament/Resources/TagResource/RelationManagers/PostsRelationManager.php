@@ -33,7 +33,7 @@ class PostsRelationManager extends RelationManager
             ->columns([
                 Tables\Columns\TextColumn::make('title'),
                 Tables\Columns\TextColumn::make('description'),
-                Tables\Columns\TextColumn::make('post'),
+                Tables\Columns\TagsColumn::make('tags.name')->separator(','),
             ])
             ->filters([
                 //

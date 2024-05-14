@@ -14,8 +14,11 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\TagsColumn;
+
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\Select;
 
@@ -55,7 +58,7 @@ class PostResource extends Resource
             ->columns([
                 TextColumn::make('title')->sortable()->searchable(),
                 TextColumn::make('category.name')->sortable()->searchable(),
-                TextColumn::make('post')->sortable()->searchable(),
+                TagsColumn::make('tags.name')->separator(','),
                 TextColumn::make('created_at')->dateTime(),
             ])
             ->filters([
