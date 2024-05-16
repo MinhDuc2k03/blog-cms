@@ -17,9 +17,10 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\TagsColumn;
 
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Group;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
-use Filament\Forms\Components\Card;
 use Filament\Forms\Components\Select;
 
 use Illuminate\Support\Str;
@@ -34,8 +35,8 @@ class PostResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-            ->schema([
-            Card::make()
+        ->schema([
+            Section::make()
             ->schema([
                 TextInput::make('title')->required()
                 ->live(onBlur: true)
@@ -43,10 +44,7 @@ class PostResource extends Resource
                     $set('slug', Str::slug($state, '_'));
                 }),
                 TextInput::make('slug')->readOnly(),
-                TextInput::make('description'),
-                FileUpload::make('thumbnail')->directory('thumbnails'),
-                Select::make('category_id')->label('Category')->relationship('category', 'name')->required(),
-                Select::make('tag_id')->label('Tags')->multiple()->relationship('tags', 'name'),
+                TextInput::make('description')->columnSpanFull(),
                 RichEditor::make('post')->required()
                 ->disableToolbarButtons([
                     'attachFiles',
@@ -54,9 +52,22 @@ class PostResource extends Resource
                     'codeBlock',
                     'h2',
                     'h3',
+                ])->columnSpanFull(),
+            ])->columns(2)->columnSpan(2),
+            Group::make()
+            ->schema([
+                Section::make()
+                ->schema([
+                    FileUpload::make('thumbnail')->directory('thumbnails'),
                 ]),
-            ])
-        ]);
+                Section::make()
+                ->schema([
+                    Select::make('category_id')->label('Category')->relationship('category', 'name')->required(),
+                    Select::make('tag_id')->label('Tags')->multiple()->relationship('tags', 'name'),
+                ]),
+            ])->columnSpan(1),
+            
+        ])->columns(3);
     }
 
     public static function table(Table $table): Table
