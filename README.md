@@ -38,3 +38,18 @@ Password: 12345
  - /admin/user: Trang admin cho các người dùng
 
  - /filament_admin: Trang admin cho dashboard làm bằng filament
+
+
+
+## Features
+- [X] Login, Logout
+- [X] Create Post
+- [X] Edit Post created by you
+- [X] Edit Profile
+- [X] View view count on posts
+- [X] Admin Panel
+  - [X] Dashboard
+  - [X] User management and authorization
+  - [X] CRUD for Post/Category/Tag/User
+  - [X] Filter data
+  - [X] Filament Admin Panel
